@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const port = require('./app/config/port')
-const path = require('path');
+
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
@@ -9,15 +9,12 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/',function(req,res){
-  res.sendFile(path.join(__dirname+'/public/turtle.html'));
-  //__dirname : It will resolve to your project folder.
-});
-
-app.use(express.static(__dirname + 'public'));
-
-
+app.use(express.static(__dirname + "/public/"))
 app.use('/public', express.static('public'));
+
+app.get("/", (req, res) => {
+    res.sendFile(__dirname+'/public/turtle.html')
+})
 
 
 app.listen(port);
