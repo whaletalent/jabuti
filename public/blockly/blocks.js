@@ -57,7 +57,7 @@ Blockly.Blocks['color'] = {
         .appendField(new Blockly.FieldImage("public/assets/tint.png", 26, 26, "*"));
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(75);
+    this.setColour(20);
     this.setTooltip('Modifica a cor do Rastro');
     this.setHelpUrl('');
   }
