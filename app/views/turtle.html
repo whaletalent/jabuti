@@ -2,7 +2,8 @@
 <html>
 
 <head>
-	<title>Jabuti Edu 5</title>
+    <title>Jabuti 5</title>
+    <link rel="shortcut icon" href="/public/assets/jabuti.png" />
 	<link type="text/css" rel="stylesheet" href="/public/styles/main.css" />
     <script src="/public/blockly/blockly_compressed.js"></script>
 	<script src="/public/blockly/javascript_compressed.js"></script>
@@ -13,11 +14,16 @@
 	<meta charset="UTF-8">
 </head>
 <body>
+    <div id="preloader">
+        <div class="img">
+            <img src="/public/assets/jabuti.png" alt="" id="loader">
+        </div>
+    </div>
     <div class="app">
         <div class="toolbox">
             <div id="blocklyDiv" style="position: relative; height: 100%; width: 100%">
                     <xml id="toolbox" style="display: none">
-                            <category name="Movimento" colour="210">
+                            <category name="Movimento" colour="185">
                                 <block type="pf"></block>
                                 <block type="pt"></block>
                                 <block type="pd">
@@ -133,9 +139,6 @@
                                     </value>
                                 </block>
                             </category>
-                            <category name="Especiais" colour="160" id="catText">
-                                
-                            </category>
                             <category name="Cores" colour="20" id="catColour">
                                 <block type="color"></block>
                                 
@@ -214,27 +217,8 @@
             
             <div id="simulacao"></div>
         </div>
-        <!--
-            <div id='app'>
-                <div class='tela' id='mid'>
-                    
-                </div>
-                
-                <div id='player'>
-                    <div id='botoes'>
-                        <button id='executar' class="btnExe" onclick='runInterpreter()'>Executar</button>
-                        <button id='parar' class="btnReset" onclick='resetSimulacao()'>Parar</button>
-                    </br>
-                    <p id="speedText">Velocidade: </p>
-                    <input type="range" value="25" min="5" max="50" step="5" class="speedRoll" id="myRange"
-                    oninput="getRoll()">
-                </div>
-            </div>
-            
-            <div id="simulacao"></div>
-        </div>
-    </div>
--->
+
+<script src="/public/js/interpreterAPI.js"></script>
 <script src="/public/blockly/blocks.js"></script>
 <script src="/public/js/ui.js"></script>
 <script src="/public/js/global-vars.js"></script>

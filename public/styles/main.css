@@ -3,8 +3,49 @@ canvas {
   image-rendering: -webkit-crisp-edges;
   image-rendering: pixelated; }
 
+@keyframes rotating {
+  from {
+    transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg); }
+  to {
+    transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg); } }
+@-webkit-keyframes rotating {
+  from {
+    transform: rotate(0deg);
+    -webkit-transform: rotate(0deg); }
+  to {
+    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg); } }
 * {
   margin: 0; }
+
+#preloader {
+  position: absolute;
+  z-index: 9999;
+  height: 100%;
+  width: 100%;
+  background-color: #212529;
+  transition: opacity .5s;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+  #preloader #loader {
+    height: 50px;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-crisp-edges;
+    image-rendering: pixelated;
+    -webkit-animation: rotating 5s linear infinite;
+    -moz-animation: rotating 5s linear infinite;
+    -ms-animation: rotating 5s linear infinite;
+    -o-animation: rotating 5s linear infinite;
+    animation: rotating 5s linear infinite; }
 
 .app {
   position: absolute;

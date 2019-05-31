@@ -1,3 +1,4 @@
+//_____ESTRUTURA E APARENCIA DO BLOCO
 Blockly.Blocks['pf'] = {
   init: function() {
     this.appendDummyInput()
@@ -58,33 +59,29 @@ Blockly.Blocks['color'] = {
     this.setNextStatement(true, null);
     this.setColour(75);
     this.setTooltip('Modifica a cor do Rastro');
-    this.setHelpUrl('http://www.example.com/');
+    this.setHelpUrl('');
   }
 };
 
-//______________PD
+//JS INJECT
 Blockly.JavaScript['pf'] = function(block) {
-  // TODO: Assemble JavaScript into code variable.
   var code = "jabutiPF(1);\n";
   return code;
 };
 
 Blockly.JavaScript['pt'] = function(block) {
-  // TODO: Assemble JavaScript into code variable.
   var code = 'jabutiPT(1);\n';
   return code;
 };
 
 Blockly.JavaScript['pd'] = function(block) {
   var angle_angulo = block.getFieldValue('angulo');
-  // TODO: Assemble JavaScript into code variable.
   var code = 'jabutiPD('+angle_angulo+');\n';
   return code;
 };
 
 Blockly.JavaScript['pe'] = function(block) {
   var angle_angulo = block.getFieldValue('angulo');
-  // TODO: Assemble JavaScript into code variable.
   var code = 'jabutiPE('+angle_angulo+');\n';
   return code;
 };
@@ -92,7 +89,6 @@ Blockly.JavaScript['pe'] = function(block) {
 
 Blockly.JavaScript['color'] = function(block) {
   var value_name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
-  // TODO: Assemble JavaScript into code variable.
   var code = 'setColor('+value_name+');\n';
   return code;
 };

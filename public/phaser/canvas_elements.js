@@ -1,7 +1,5 @@
-
-
+//Inicia a tela de simulacao
 window.onload = function() {
-    // Cria o cenário
     game = new Phaser.Game(game_width, game_height, Phaser.CANVAS, 'simulacao', {
         preload: carregaAssets,
         create: criaCenario,
@@ -9,58 +7,35 @@ window.onload = function() {
     }, null, false, false);
 }
  
-
-/**
- *  Carrega imagens
- */
 function carregaAssets() {
-    // Código da função virá aqui
 	game.load.image('fundo', 'public/assets/fundo.png')
 	game.load.spritesheet('trail', '/public/assets/trail.png', 16, 16);
 	game.load.spritesheet('dude', 'public/assets/jabuti.png', 16, 16);
-	
 }
+
 function criaFundo(){
     // Adiciona o fundo
 	game.add.tileSprite(0, 0, game_width, game_height, 'fundo');
-	//traillll
+	//Adiciona o rastro via texture
 	texture = game.add.renderTexture(game_width, game_height, 'rastro');
 	rastro = game.make.sprite(0, 0, 'trail');
 	rastro.anchor.set(0.5);
     game.add.sprite(0, 0, texture);
 }
  
-/**
- *  Cria cenário do jogo
- */
+
 function criaCenario() {
-    // Código da função virá aqui
 	criaFundo();
-	
-	// Cria o jabuti
     criaJogador();
-	
-	
-	
 }
 function criaJogador(){
-    // Cria o player e o adiciona no jogo (x,y)
     jogador = game.add.sprite((game.world.width/2), (game.world.height/2), 'dude');
- 
-   // É necessário adicionar a física no jogador
     game.physics.arcade.enable(jogador);
 	jogador.anchor.setTo(0.5, 0.5);
     
-   
- 
-    // Nâo deixa jogador "fugir" do mundo
+    // nao deixa o jabuti sair da tela
     jogador.body.collideWorldBounds = true;
- 
-   
- 
-    // Nâo deixa jogador "fugir" do mundo
-    jogador.body.collideWorldBounds = true;
- 
+
     // Define duas animações (esquerda e direita) para caminhar
     // 'nome', posições no quadro, quantas atualizações por segundo
     jogador.animations.add('left', [0, 1, 2, 3], 10, true);
@@ -79,13 +54,8 @@ function resetSimulacao(){
 	setColor('#FFFFFF');
 	habilitaBotaoPlay()
 	desabilitaBotaoStop()
-
-	
 }
-/**
- *  Atualiza jogo. Esta função roda em torno de 60 vezes em 1 segundo, ou seja,
- *  60 FPS (FPS = Frames Por Segundo)
- */
+
 function atualizaJogo() {
 	jogador.angle = angle;
 	//if (!game.input.activePointer.position.isZero())
@@ -94,6 +64,7 @@ function atualizaJogo() {
     //}
 	
 }
+//altera a cor do rastro
 function setColor(cor){
 	rastro.tint = '0x'+cor.substr(1);;
 }
@@ -114,8 +85,7 @@ function giraJabuti(valor, quanto){
 	angle = parseInt(angle);
 	if(valor == 'D'){
 		//moveTo(tempo, quantidade, angulo)
-		angle = angle+quanto;
-		
+		angle = angle+quanto;	
 	}
 	if(valor == 'E'){
 		//moveTo(tempo, quantidade, angulo)
