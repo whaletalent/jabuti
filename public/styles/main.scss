@@ -1,0 +1,121 @@
+$dark-primary: #212529;
+$text-color: #dddddd;
+
+$blockly-green: #5ba55b;
+$blockly-purple: #995ba5;
+$blockly-blue: #5a9ea4;
+
+canvas {
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-crisp-edges;
+    image-rendering: pixelated;
+}
+
+*{
+    margin: 0;
+}
+.app{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: $dark-primary;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.toolbox{
+    height: 90%;
+    width: 50%;
+}
+#simulacao{
+    height: 100%;
+    width: 50%;
+    background-color: $dark-primary;
+}
+.botoes{
+    height: 10%;
+    width: 100%;
+    background-color: $dark-primary;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    .botao{
+        position: relative;
+        background-color: $blockly-green;
+        height: 50%;
+        width: 3em;
+        border: 5px solid darken($blockly-green, 20%);
+        border-top: 1px solid lighten($blockly-green, 50%);
+        border-radius: 5px;
+        &:disabled{
+            border: 3px solid darken($dark-primary, 3%);
+            background-color: lighten($dark-primary, 10%);
+            cursor: no-drop;
+        }
+    }
+}
+
+//Blockly Config
+.blocklySvg{
+	background-color: $dark-primary;
+	box-shadow: inset 0px 0px 10px rgba(0,0,0,1.9);
+}
+.blocklyScrollbarHandle {
+	fill: $blockly-green;
+}
+.blocklyScrollbarBackground:hover+.blocklyScrollbarHandle, .blocklyScrollbarHandle:hover {
+	fill: $blockly-green;
+}
+.blocklyToolboxDiv{
+    background-color: lighten($dark-primary, 10%);
+    .blocklyTreeLabel{
+        color: $text-color;
+    }
+}
+.blocklyHorizontalTree:hover{
+    background-color: lighten($dark-primary, 20%) !important;
+}
+.blocklyFlyoutBackground{
+    fill: lighten($dark-primary, 10%) !important;
+}
+
+//Range
+.speedRoll {
+    -webkit-appearance: none;
+    width: 10em;
+    height: .1em;
+    border-radius: 5px;
+    border: solid lighten($dark-primary, 20%) 0.2em;
+    background: transparent;
+    outline: none;
+   
+	
+}
+
+
+.speedRoll::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: transparent;
+    cursor: grabbing;
+    background-image: url('/public/assets/speed.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 1.5em;
+}
+
+.speedRoll::-moz-range-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: lighten($blockly-green, 10%);
+    cursor: pointer;
+    -webkit-box-shadow: 0px 0px 13px lighten($blockly-green, 10%);
+    -moz-box-shadow: 0px 0px 13px lighten($blockly-green, 10%);
+    box-shadow: 0px 0px 25px lighten($blockly-green, 10%);
+}

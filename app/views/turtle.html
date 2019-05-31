@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Jabuti Edu 5</title>
+	<link type="text/css" rel="stylesheet" href="/public/styles/main.css" />
+    <script src="/public/blockly/blockly_compressed.js"></script>
+	<script src="/public/blockly/javascript_compressed.js"></script>
+	<script src="/public/blockly/blocks_compressed.js"></script>
+	<script src="/public/phaser/phaser.min.js"></script>
+	<script src="/public/blockly/lang/pt-br.js"></script>
+	<script src="/public/acorn/acorn_interpreter.js"></script>  
+	<meta charset="UTF-8">
+</head>
+<body>
+    <div class="app">
+        <div class="toolbox">
+            <div id="blocklyDiv" style="position: relative; height: 100%; width: 100%">
+                    <xml id="toolbox" style="display: none">
+                            <category name="Movimento" colour="210">
+                                <block type="pf"></block>
+                                <block type="pt"></block>
+                                <block type="pd">
+                                    <field name="angulo">0</field>
+                                </block>
+                                <block type="pe">
+                                    <field name="angulo">0</field>
+                                </block>
+                                
+                            </category>
+                            <category id="catLogic" colour="210" name="Lógica">
+                                <block type="controls_if"></block>
+                                <block type="logic_compare"></block>
+                                <block type="logic_operation"></block>
+                                <block type="logic_negate"></block>
+                                <block type="logic_boolean"></block>
+                                <block type="logic_null"></block>
+                                <block type="logic_ternary"></block>
+                            </category>
+
+
+                            <category name="Repetição" colour="120">
+                                <block type="controls_repeat_ext">
+                                    <value name="TIMES">
+                                        <shadow type="math_number">
+                                            <field name="NUM">10</field>
+                                        </shadow>
+                                    </value>
+                                </block>
+                                
+                                <block type="controls_for">
+                                    <value name="FROM">
+                                        <shadow type="math_number">
+                                            <field name="NUM">1</field>
+                                        </shadow>
+                                    </value>
+                                    <value name="TO">
+                                        <shadow type="math_number">
+                                            <field name="NUM">10</field>
+                                        </shadow>
+                                    </value>
+                                    <value name="BY">
+                                        <shadow type="math_number">
+                                            <field name="NUM">1</field>
+                                        </shadow>
+                                    </value>
+                                </block>
+                                <block type="controls_flow_statements"></block>
+                            </category>
+                            <category id="catMath" colour="230" name="Matemática">
+                                <block type="math_number">
+                                    <field name="NUM">1</field>
+                                </block>
+                                
+                                <block type="math_arithmetic">
+                                    <value name="A">
+                                        <shadow type="math_number">
+                                            <field name="NUM">1</field>
+                                        </shadow>
+                                    </value>
+                                    <value name="B">
+                                        <shadow type="math_number">
+                                            <field name="NUM">1</field>
+                                        </shadow>
+                                    </value>
+                                </block>
+                                <block type="math_number_property">
+                                    <value name="NUMBER_TO_CHECK">
+                                        <shadow type="math_number">
+                                            <field name="NUM">1</field>
+                                        </shadow>
+                                    </value>
+                                </block>
+                                <block type="math_modulo">
+                                    <value name="DIVIDEND">
+                                        <shadow type="math_number">
+                                            <field name="NUM">2</field>
+                                        </shadow>
+                                    </value>
+                                    <value name="DIVISOR">
+                                        <shadow type="math_number">
+                                            <field name="NUM">5</field>
+                                        </shadow>
+                                    </value>
+                                </block>
+                                <block type="math_constrain">
+                                    <value name="VALUE">
+                                        <shadow type="math_number">
+                                            <field name="NUM">5</field>
+                                        </shadow>
+                                    </value>
+                                    <value name="LOW">
+                                        <shadow type="math_number">
+                                            <field name="NUM">1</field>
+                                        </shadow>
+                                    </value>
+                                    <value name="HIGH">
+                                        <shadow type="math_number">
+                                            <field name="NUM">10</field>
+                                        </shadow>
+                                    </value>
+                                </block>
+                                <block type="math_random_int">
+                                    <value name="FROM">
+                                        <shadow type="math_number">
+                                            <field name="NUM">1</field>
+                                        </shadow>
+                                    </value>
+                                    <value name="TO">
+                                        <shadow type="math_number">
+                                            <field name="NUM">1</field>
+                                        </shadow>
+                                    </value>
+                                </block>
+                            </category>
+                            <category name="Especiais" colour="160" id="catText">
+                                
+                            </category>
+                            <category name="Cores" colour="20" id="catColour">
+                                <block type="color"></block>
+                                
+                                <block type="colour_picker"></block>
+                                <block type="colour_random"></block>
+                                <block type="colour_rgb">
+                                    <value name="RED">
+                                        <shadow type="math_number">
+                                            <field name="NUM">255</field>
+                                        </shadow>
+                                    </value>
+                                    <value name="GREEN">
+                                        <shadow type="math_number">
+                                            <field name="NUM">255</field>
+                                        </shadow>
+                                    </value>
+                                    <value name="BLUE">
+                                        <shadow type="math_number">
+                                            <field name="NUM">255</field>
+                                        </shadow>
+                                    </value>
+                                </block>
+                                <block type="colour_blend">
+                                    <value name="COLOUR1">
+                                        <shadow type="colour_picker">
+                                            <field name="COLOUR">#00ccff</field>
+                                        </shadow>
+                                    </value>
+                                    <value name="COLOUR2">
+                                        <shadow type="colour_picker">
+                                            <field name="COLOUR">#00FFAA</field>
+                                        </shadow>
+                                    </value>
+                                    <value name="RATIO">
+                                        <shadow type="math_number">
+                                            <field name="NUM">0.5</field>
+                                        </shadow>
+                                    </value>
+                                </block>
+                            </category>
+                            <category id="catVariables" name="Variáveis" colour="330" custom="VARIABLE"></category>
+                            <category name="Funções" colour="290" custom="PROCEDURE">
+                            </category>
+                        </xml>
+                        <script>
+                            var workspace = Blockly.inject('blocklyDiv',
+                            {
+                                toolbox: document.getElementById('toolbox'),
+                                
+                                trashcan: true, horizontalLayout: true, disable: true, scrollbars: true
+                            });
+                            //delete Blockly.Blocks.procedures_defreturn;
+                            //delete Blockly.Blocks.procedures_ifreturn;
+                            </script>
+                </div>
+                <div class="botoes">
+                    <button class="botao" id="play" onclick='runInterpreter()'>
+                        <img src="/public/assets/play.png" alt="">
+                    </button>
+                    <button class="botao" disabled id="stop" onclick='resetSimulacao()'>
+                        <img src="/public/assets/stop.png" alt="">
+                    </button>
+                    <button class="botao" onclick="window.confirm('Remover os blocos da tela?') ? workspace.clear():null"><img src="/public/assets/trashcan.png" alt=""></button>
+                    <button class="botao" onclick="workspace.undo(false)">
+                        <img src="/public/assets/undo.png" alt="">
+                    </button>
+                    <button class="botao" onclick="workspace.undo(true)"">
+                        <img src="/public/assets/redo.png" alt="">
+                    </button>
+                    <div class="velocidade">
+                        <input type="range" value="25" min="5" max="50" step="5" class="speedRoll" id="velocidade"
+                        oninput="getSpeed()">
+                    </div>
+                </div>
+            </div>
+            
+            <div id="simulacao"></div>
+        </div>
+        <!--
+            <div id='app'>
+                <div class='tela' id='mid'>
+                    
+                </div>
+                
+                <div id='player'>
+                    <div id='botoes'>
+                        <button id='executar' class="btnExe" onclick='runInterpreter()'>Executar</button>
+                        <button id='parar' class="btnReset" onclick='resetSimulacao()'>Parar</button>
+                    </br>
+                    <p id="speedText">Velocidade: </p>
+                    <input type="range" value="25" min="5" max="50" step="5" class="speedRoll" id="myRange"
+                    oninput="getRoll()">
+                </div>
+            </div>
+            
+            <div id="simulacao"></div>
+        </div>
+    </div>
+-->
+<script src="/public/blockly/blocks.js"></script>
+<script src="/public/js/ui.js"></script>
+<script src="/public/js/global-vars.js"></script>
+<script src="/public/js/funcoes.js"></script>
+<script src="/public/phaser/canvas_elements.js"></script>
+</body>
+</html>
