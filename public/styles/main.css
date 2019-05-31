@@ -3,6 +3,11 @@ canvas {
   image-rendering: -webkit-crisp-edges;
   image-rendering: pixelated; }
 
+@media only screen and (max-width: 600px) {
+  body .app {
+    display: none; }
+  body .warning p {
+    display: inline !important; } }
 @keyframes rotating {
   from {
     transform: rotate(0deg);
