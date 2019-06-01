@@ -1,5 +1,6 @@
 $dark-primary: #212529;
 $text-color: #dddddd;
+$default-font: monospace;
 
 $blockly-green: #5ba55b;
 $blockly-purple: #995ba5;
@@ -48,16 +49,17 @@ canvas {
 		transform: rotate(0deg);
 		-webkit-transform: rotate(0deg);
 		}
-	to
+        to
 		{
-		transform: rotate(360deg);
-		-webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+            -webkit-transform: rotate(360deg);
 		}
 	}
-
-*{
-    margin: 0;
-}
+    
+    *{
+        margin: 0;
+        font-family: $default-font;
+    }
 #preloader{
     position: absolute;
     z-index: 9999;
@@ -80,6 +82,14 @@ canvas {
         animation: rotating 5s linear infinite;
     }
 }
+.tutorial{
+    position: absolute;
+    z-index: 888;
+    cursor: pointer;
+    //border: 2px solid $text-color;
+    align-self: center;
+    box-shadow: .1em .1em 1em .1em $blockly-blue;
+}
 .app{
     position: absolute;
     height: 100%;
@@ -88,6 +98,7 @@ canvas {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
 }
 .toolbox{
     height: 90%;
@@ -179,4 +190,63 @@ canvas {
     -webkit-box-shadow: 0px 0px 13px lighten($blockly-green, 10%);
     -moz-box-shadow: 0px 0px 13px lighten($blockly-green, 10%);
     box-shadow: 0px 0px 25px lighten($blockly-green, 10%);
+}
+
+
+
+.botao {
+	position: relative;
+	display: inline;
+	span {
+		position: absolute;
+		width: auto;
+		color: $dark-primary;
+        background: $text-color;
+        padding: 0.1em;
+		//height: 29px;
+		//line-height: 29px;
+		text-align: center;
+		visibility: hidden;
+        //border-radius: 25px;
+	}
+}
+.botao {
+	&:hover.botao {
+		span {
+			visibility: visible;
+			opacity: 1;
+			bottom: 2.5em;
+			left: -0.8em;
+			//margin-left: -76px;
+			z-index: 999;
+		}
+	}
+}
+.velocidade {
+	position: relative;
+	display: inline;
+	span {
+		position: absolute;
+		width: auto;
+		color: $dark-primary;
+        background: $text-color;
+        padding: 0.1em;
+		//height: 29px;
+		//line-height: 29px;
+		text-align: center;
+		visibility: hidden;
+        //border-radius: 25px;
+	}
+}
+.velocidade {
+	&:hover.velocidade {
+		span {
+			visibility: visible;
+			opacity: 1;
+			bottom: 2em;
+			left: -0.8em;
+			//margin-left: -76px;
+			z-index: 999;
+		}
+	}
 }

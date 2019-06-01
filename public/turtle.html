@@ -17,14 +17,16 @@
 <body>
     <div class="warning">
         <p style="color: red; display: none">Jabuti app não funciona 
-            em  telas com largura inferior à 600px</p>
+            em dispositivos com largura de tela inferior à 600px</p>
     </div>
-    <div id="preloader">
+   <!-- <div id="preloader">
         <div class="img">
             <img src="/public/assets/jabuti.png" alt="" id="loader">
         </div>
     </div>
+    -->
     <div class="app">
+        <img src="/public/assets/tutorial" onclick="event.target.style.display = 'none'" alt="" class="tutorial">
         <div class="toolbox">
             <div id="blocklyDiv" style="position: relative; height: 100%; width: 100%">
                     <xml id="toolbox" style="display: none">
@@ -216,21 +218,28 @@
                 </div>
                 <div class="botoes">
                     <button class="botao" id="play" onclick='runInterpreter()'>
+                        <span>Executar</span>
                         <img src="/public/assets/play.png" alt="">
                     </button>
                     <button class="botao" disabled id="stop" onclick='resetSimulacao()'>
+                        <span>Parar Execução</span>
                         <img src="/public/assets/stop.png" alt="">
                     </button>
-                    <button class="botao" onclick="window.confirm('Remover os blocos da tela?') ? workspace.clear():null"><img src="/public/assets/trashcan.png" alt=""></button>
+                    <button class="botao" onclick="window.confirm('Remover os blocos da tela?') ? workspace.clear():null">
+                        <span>Limpar Tela</span>
+                        <img src="/public/assets/trashcan.png" alt=""></button>
                     <button class="botao" onclick="workspace.undo(false)">
+                        <span>Desfazer</span>
                         <img src="/public/assets/undo.png" alt="">
                     </button>
-                    <button class="botao" onclick="workspace.undo(true)"">
+                    <button class="botao" onclick="workspace.undo(true)">
+                        <span>Refazer</span>
                         <img src="/public/assets/redo.png" alt="">
                     </button>
                     <div class="velocidade">
+                            <span>Velocidade de Execução</span>
                         <input type="range" value="25" min="5" max="50" step="5" class="speedRoll" id="velocidade"
-                        oninput="getSpeed()">
+                        oninput="getSpeed()"></input>
                     </div>
                 </div>
             </div>
@@ -238,11 +247,11 @@
             <div id="simulacao"></div>
         </div>
 
-<script src="/public/js/interpreterAPI.js"></script>
-<script src="/public/blockly/blocks.js"></script>
-<script src="/public/js/ui.js"></script>
-<script src="/public/js/global-vars.js"></script>
-<script src="/public/js/funcoes.js"></script>
-<script src="/public/phaser/canvas_elements.js"></script>
+    <script src="/public/js/interpreterAPI.js"></script>
+    <script src="/public/blockly/blocks.js"></script>
+    <script src="/public/js/ui.js"></script>
+    <script src="/public/js/global-vars.js"></script>
+    <script src="/public/js/funcoes.js"></script>
+    <script src="/public/phaser/canvas_elements.js"></script>
 </body>
 </html>

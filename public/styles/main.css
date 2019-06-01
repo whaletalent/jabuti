@@ -29,7 +29,8 @@ canvas {
     transform: rotate(360deg);
     -webkit-transform: rotate(360deg); } }
 * {
-  margin: 0; }
+  margin: 0;
+  font-family: monospace; }
 
 #preloader {
   position: absolute;
@@ -52,6 +53,13 @@ canvas {
     -o-animation: rotating 5s linear infinite;
     animation: rotating 5s linear infinite; }
 
+.tutorial {
+  position: absolute;
+  z-index: 888;
+  cursor: pointer;
+  align-self: center;
+  box-shadow: 0.1em 0.1em 1em 0.1em #5a9ea4; }
+
 .app {
   position: absolute;
   height: 100%;
@@ -59,7 +67,8 @@ canvas {
   background-color: #212529;
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap; }
+  flex-wrap: wrap;
+  justify-content: center; }
 
 .toolbox {
   height: 90%;
@@ -144,5 +153,43 @@ canvas {
   -webkit-box-shadow: 0px 0px 13px #7cb77c;
   -moz-box-shadow: 0px 0px 13px #7cb77c;
   box-shadow: 0px 0px 25px #7cb77c; }
+
+.botao {
+  position: relative;
+  display: inline; }
+  .botao span {
+    position: absolute;
+    width: auto;
+    color: #212529;
+    background: #dddddd;
+    padding: 0.1em;
+    text-align: center;
+    visibility: hidden; }
+
+.botao:hover.botao span {
+  visibility: visible;
+  opacity: 1;
+  bottom: 2.5em;
+  left: -0.8em;
+  z-index: 999; }
+
+.velocidade {
+  position: relative;
+  display: inline; }
+  .velocidade span {
+    position: absolute;
+    width: auto;
+    color: #212529;
+    background: #dddddd;
+    padding: 0.1em;
+    text-align: center;
+    visibility: hidden; }
+
+.velocidade:hover.velocidade span {
+  visibility: visible;
+  opacity: 1;
+  bottom: 2em;
+  left: -0.8em;
+  z-index: 999; }
 
 /*# sourceMappingURL=main.css.map */
