@@ -1,17 +1,38 @@
 {
-  "name": "turtle",
-  "version": "1.0.0",
-  "description": "Node Turtle with Blockly and Phaser.io",
-  "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js",
-    "dev": "nodemon app.js"
+  "name": "jabuti",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "author": "whaletalent",
+  "license": "MIT",
+  "engines": {
+    "node": ">=24"
   },
-  "author": "",
-  "license": "ISC",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
   "dependencies": {
-    "express": "^4.17.1",
-    "nodemon": "^1.19.1"
+    "@blockly/field-angle": "^13.4.0",
+    "@blockly/field-colour": "^13.4.0",
+    "blockly": "^13.4.0",
+    "js-interpreter": "^6.0.2",
+    "phaser": "^4.2.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.15.0",
+    "eslint-config-prettier": "^10.1.8",
+    "globals": "^17.14.0",
+    "prettier": "^3.10.1",
+    "vite": "^8.3.8",
+    "vitest": "^5.1.0"
   }
 }
