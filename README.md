@@ -7,7 +7,7 @@ A programming-logic learning game: snap Blockly blocks together and a turtle wal
 
 **▶ Play it: https://whaletalent.github.io/jabuti/**
 
-![Jabuti: the block toolbox, a "repita 36 vezes { pf; pd 15° }" program and the cyan circle it draws](docs/screenshot.png)
+![Jabuti: the block editor with the example program (two nested repeats with colour blocks) and the two-colour flower it draws on the canvas](docs/screenshot.png)
 
 ## What it is
 
