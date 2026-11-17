@@ -7,11 +7,11 @@ A programming-logic learning game: snap Blockly blocks together and a turtle wal
 
 **▶ Play it: https://whaletalent.github.io/jabuti/**
 
-![Jabuti: the block toolbox, a "repita 36 vezes { pf; pd 15° }" program and the cyan circle it draws](docs/screenshot.png)
+![Jabuti: the block editor with the example program (two nested repeats with colour blocks) and the two-colour flower it draws on the canvas](docs/screenshot.png)
 
 ## What it is
 
-Jabuti ("tortoise" in Portuguese) is an educational, Logo-style game. Players build a program out of visual blocks (move, turn, repeat, set colour, use variables and functions) and press "Executar" to watch the turtle draw it. The workspace opens with a ready-made example (set the colour to cyan, then repeat 36 times: forward, turn right 15°) that draws a circle; run it, change it or clear it and start from scratch. It is meant to introduce programming logic to Brazilian kids, so the interface is in Portuguese (pt-BR); this README is in English. It needs a screen at least 600 px wide; narrower screens show a warning instead of the app.
+Jabuti ("tortoise" in Portuguese) is an educational, Logo-style game. Players build a program out of visual blocks (move, turn, repeat, set colour, use variables and functions) and press "Executar" to watch the turtle draw it. The workspace opens with a ready-made example (six times: cyan, five steps turning 15°, then pink, five steps turning 45°) that draws a two-colour flower; run it, change it or delete the blocks and start from scratch. It was made to introduce programming logic to Brazilian kids; the interface opens in English and switches to Portuguese (pt-BR) with the language button (the choice is remembered, and `?lang=pt` or `?lang=en` in the URL forces one). This README is in English. It works on desktops, tablets and phones: on narrow or portrait screens the canvas sits above the block editor.
 
 ## The blocks
 
@@ -29,7 +29,7 @@ The "Movimento" category holds the turtle blocks:
 
 The rest of the toolbox is standard Blockly. The seven categories are Movimento, Lógica, Repetição, Matemática, Cores, Variáveis and Funções.
 
-Controls: "Executar" runs the program and is re-enabled when it ends, so successive runs accumulate on the canvas. "Parar Execução" stops it, clears the trail and re-centres the turtle. "Limpar Tela" removes all blocks (after a confirmation), and "Desfazer" / "Refazer" are undo and redo. Two sliders set the speed ("Velocidade de Execução") and the step length in pixels ("Tamanho do passo", 1 to 32, default 8).
+Controls (icon buttons, labels on hover): Run starts the program and is re-enabled when it ends, so successive runs accumulate on the canvas. Stop halts it, clears the trail and re-centres the turtle, and stays available after a run as a reset. Undo / Redo act on the blocks; drag blocks to the trash can in the editor to delete them. The language button switches between English and Portuguese. Two sliders set the speed (gauge icon; above the middle the run goes into a no-delay turbo) and the step length in pixels (ruler icon, 1 to 32, default 8).
 
 ## How it works
 
@@ -47,6 +47,7 @@ Controls: "Executar" runs the program and is re-enabled when it ends, so success
 | [Blockly 13](https://developers.google.com/blockly)              | The visual block editor and the blocks-to-JavaScript generator             |
 | `@blockly/field-angle`, `@blockly/field-colour`                  | Angle picker and colour blocks, which moved out of Blockly core            |
 | [Phaser 4](https://phaser.io)                                    | The canvas: background, trail render texture and turtle sprite             |
+| [Lucide](https://lucide.dev)                                     | Icon set for the control buttons and sliders                               |
 | [JS-Interpreter 6](https://github.com/NeilFraser/JS-Interpreter) | Runs generated code step by step, so blocks can be highlighted and stopped |
 | [Vitest](https://vitest.dev)                                     | Unit tests (the Vitest suite)                                              |
 | ESLint, Prettier                                                 | Linting and formatting                                                     |
@@ -81,13 +82,17 @@ Then open <http://localhost:5173/jabuti/>. The app is served under `/jabuti/` be
 ## Project structure
 
 ```
-index.html            app shell: toolbox, canvas mount, buttons, sliders
+index.html            app shell: welcome dialog, toolbox, canvas mount, controls
 vite.config.js        base path /jabuti/ and test setup
-public/assets/        sprites, icons and the tutorial image
+public/assets/        sprites (turtle, background, block icons)
+public/fonts/         VCR OSD Mono, used by the welcome dialog
 src/
-  main.js             boot: Blockly, Phaser, runner and UI wiring
+  main.js             boot: language, icons, Blockly, Phaser, runner and UI wiring
+  layout.js           stacked-vs-side-by-side media query and canvas sizing
+  session.js          hands the program over a language switch (sessionStorage)
   runner.js           JS-Interpreter wrapper: run, step, stop, highlight
-  ui.js               buttons, sliders, preloader
+  ui.js               buttons, sliders, preloader, welcome dialog, language toggle
+  i18n/               messages (pt, en), language detection, DOM translation
   blocks/             block definitions, generators, toolbox, Blockly setup
   game/               turtle.js (pure state), scene.js (Phaser), createGame.js
   styles/main.css

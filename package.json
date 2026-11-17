@@ -24,6 +24,7 @@
     "@blockly/field-colour": "^13.4.0",
     "blockly": "^13.4.0",
     "js-interpreter": "^6.0.2",
+    "lucide": "^1.74.0",
     "phaser": "^4.2.1"
   },
   "devDependencies": {

@@ -7,12 +7,6 @@
     <title>Jabuti</title>
   </head>
   <body>
-    <div class="warning">
-      <p style="color: red; display: none">
-        Jabuti app não funciona em dispositivos com largura de tela inferior à
-        600px
-      </p>
-    </div>
     <div id="preloader">
       <div class="img">
         <img src="/assets/jabuti.png" alt="" id="loader" />
@@ -20,32 +14,99 @@
     </div>
 
     <div class="app">
-      <img src="/assets/tutorial.png" alt="" id="tutorial" class="tutorial" />
+      <div
+        id="welcome"
+        class="welcome"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="welcome-title"
+      >
+        <div class="welcome-card">
+          <h1 id="welcome-title" data-i18n="welcome.title"></h1>
+          <section>
+            <p data-i18n="welcome.intro"></p>
+            <ul class="welcome-cats">
+              <li>
+                <i style="--c: #5a9ea4"></i
+                ><span data-i18n="category.movimento"></span>
+              </li>
+              <li>
+                <i style="--c: #5b80a5"></i
+                ><span data-i18n="category.logica"></span>
+              </li>
+              <li>
+                <i style="--c: #5ba55b"></i
+                ><span data-i18n="category.repeticao"></span>
+              </li>
+              <li>
+                <i style="--c: #5b67a5"></i
+                ><span data-i18n="category.matematica"></span>
+              </li>
+              <li>
+                <i style="--c: #a5745b"></i
+                ><span data-i18n="category.cores"></span>
+              </li>
+              <li>
+                <i style="--c: #a55b80"></i
+                ><span data-i18n="category.variaveis"></span>
+              </li>
+              <li>
+                <i style="--c: #995ba5"></i
+                ><span data-i18n="category.funcoes"></span>
+              </li>
+            </ul>
+          </section>
+          <section class="welcome-run">
+            <i data-lucide="play" class="welcome-play"></i>
+            <p data-i18n="welcome.run"></p>
+          </section>
+          <section class="welcome-cols">
+            <div>
+              <p data-i18n="welcome.left"></p>
+              <div class="welcome-demo">
+                <span class="welcome-dots"></span>
+                <img src="/assets/jabuti.png" alt="" />
+              </div>
+            </div>
+            <div>
+              <h2 data-i18n="welcome.right.title"></h2>
+              <p data-i18n="welcome.right.text"></p>
+            </div>
+          </section>
+          <button
+            id="start"
+            class="welcome-start"
+            data-i18n="welcome.start"
+          ></button>
+        </div>
+      </div>
       <div class="toolbox">
         <div id="blocklyDiv"></div>
         <div class="botoes">
-          <button class="botao" id="play">
-            <span>Executar</span>
-            <img src="/assets/play.png" alt="" />
+          <button class="botao" id="play" data-i18n-aria="ui.run">
+            <span data-i18n="ui.run"></span>
+            <i data-lucide="play" aria-hidden="true"></i>
           </button>
-          <button class="botao" id="stop" disabled>
-            <span>Parar Execução</span>
-            <img src="/assets/stop.png" alt="" />
+          <button class="botao" id="stop" data-i18n-aria="ui.stop" disabled>
+            <span data-i18n="ui.stop"></span>
+            <i data-lucide="square" aria-hidden="true"></i>
           </button>
-          <button class="botao" id="clear">
-            <span>Limpar Tela</span>
-            <img src="/assets/trashcan.png" alt="" />
+          <button class="botao" id="undo" data-i18n-aria="ui.undo">
+            <span data-i18n="ui.undo"></span>
+            <i data-lucide="undo-2" aria-hidden="true"></i>
           </button>
-          <button class="botao" id="undo">
-            <span>Desfazer</span>
-            <img src="/assets/undo.png" alt="" />
+          <button class="botao" id="redo" data-i18n-aria="ui.redo">
+            <span data-i18n="ui.redo"></span>
+            <i data-lucide="redo-2" aria-hidden="true"></i>
           </button>
-          <button class="botao" id="redo">
-            <span>Refazer</span>
-            <img src="/assets/redo.png" alt="" />
+          <button class="botao" id="lang" data-i18n-aria="ui.lang">
+            <span data-i18n="ui.lang"></span>
+            <i data-lucide="languages" aria-hidden="true"></i>
+            <b id="lang-code"></b>
           </button>
           <div class="velocidade">
-            <span>Velocidade de Execução</span>
+            <span data-i18n="ui.speed"></span>
+            <i data-lucide="gauge" class="slider-icon" aria-hidden="true"></i>
             <input
               type="range"
               value="25"
@@ -54,10 +115,12 @@
               step="5"
               class="speedRoll"
               id="velocidade"
+              data-i18n-aria="ui.speed"
             />
           </div>
           <div class="velocidade">
-            <span>Tamanho do passo</span>
+            <span data-i18n="ui.step"></span>
+            <i data-lucide="ruler" class="slider-icon" aria-hidden="true"></i>
             <input
               type="range"
               value="8"
@@ -65,6 +128,7 @@
               max="32"
               class="speedRoll"
               id="passo"
+              data-i18n-aria="ui.step"
             />
             <output id="passo-valor">8</output>
           </div>

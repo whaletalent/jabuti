@@ -1,6 +1,13 @@
 import { setStep } from "./game/turtle.js";
 
-export function bindUi({ runner, workspace, scene, turtle, doc = document }) {
+export function bindUi({
+  runner,
+  workspace,
+  scene,
+  turtle,
+  onToggleLang = () => {},
+  doc = document,
+}) {
   const $ = (id) => doc.getElementById(id);
   const play = $("play");
   const stop = $("stop");
@@ -10,9 +17,6 @@ export function bindUi({ runner, workspace, scene, turtle, doc = document }) {
     runner.stop();
     scene.resetScene();
     stop.disabled = true;
-  });
-  $("clear").addEventListener("click", () => {
-    if (confirm("Remover os blocos da tela?")) workspace.clear();
   });
   $("undo").addEventListener("click", () => workspace.undo(false));
   $("redo").addEventListener("click", () => workspace.undo(true));
@@ -33,9 +37,10 @@ export function bindUi({ runner, workspace, scene, turtle, doc = document }) {
     }, 500);
   }, 1000);
 
-  $("tutorial").addEventListener("click", (e) => {
-    e.target.style.display = "none";
+  $("start").addEventListener("click", () => {
+    $("welcome").style.display = "none";
   });
+  $("lang")?.addEventListener("click", onToggleLang);
 
   const setRunning = (running) => {
     play.disabled = running;

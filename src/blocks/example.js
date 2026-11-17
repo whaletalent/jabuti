@@ -2,7 +2,8 @@ import * as Blockly from "blockly";
 
 /**
  * The program shown when Jabuti opens with an empty workspace:
- * trail colour cyan, then repeat 36 × (forward, turn right 15°) — a circle.
+ * repeat 6 × { cyan; repeat 5 × (forward, right 15°); pink; repeat 5 × (forward, right 45°) }
+ * — a two-colour flower.
  * Blockly 13 workspace-serialization format.
  */
 export const exampleState = {
@@ -10,23 +11,70 @@ export const exampleState = {
     languageVersion: 0,
     blocks: [
       {
-        type: "color",
+        type: "controls_repeat_ext",
         x: 20,
         y: 20,
         inputs: {
-          NAME: {
-            block: { type: "colour_picker", fields: { COLOUR: "#00ccff" } },
-          },
-        },
-        next: {
-          block: {
-            type: "controls_repeat_ext",
-            inputs: {
-              TIMES: { shadow: { type: "math_number", fields: { NUM: 36 } } },
-              DO: {
+          TIMES: { shadow: { type: "math_number", fields: { NUM: 6 } } },
+          DO: {
+            block: {
+              type: "color",
+              inputs: {
+                NAME: {
+                  block: {
+                    type: "colour_picker",
+                    fields: { COLOUR: "#66ffff" },
+                  },
+                },
+              },
+              next: {
                 block: {
-                  type: "pf",
-                  next: { block: { type: "pd", fields: { angulo: 15 } } },
+                  type: "controls_repeat_ext",
+                  inputs: {
+                    TIMES: {
+                      shadow: { type: "math_number", fields: { NUM: 5 } },
+                    },
+                    DO: {
+                      block: {
+                        type: "pf",
+                        next: { block: { type: "pd", fields: { angulo: 15 } } },
+                      },
+                    },
+                  },
+                  next: {
+                    block: {
+                      type: "color",
+                      inputs: {
+                        NAME: {
+                          block: {
+                            type: "colour_picker",
+                            fields: { COLOUR: "#ff66ff" },
+                          },
+                        },
+                      },
+                      next: {
+                        block: {
+                          type: "controls_repeat_ext",
+                          inputs: {
+                            TIMES: {
+                              shadow: {
+                                type: "math_number",
+                                fields: { NUM: 5 },
+                              },
+                            },
+                            DO: {
+                              block: {
+                                type: "pf",
+                                next: {
+                                  block: { type: "pd", fields: { angulo: 45 } },
+                                },
+                              },
+                            },
+                          },
+                        },
+                      },
+                    },
+                  },
                 },
               },
             },

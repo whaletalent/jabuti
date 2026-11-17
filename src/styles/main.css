@@ -1,3 +1,9 @@
+@font-face {
+  font-family: "VCR OSD Mono";
+  src: url("/fonts/retro.ttf") format("truetype");
+  font-display: swap;
+}
+
 :root {
   --dark-primary: #212529;
   --dark-lighter: #383f45;
@@ -14,6 +20,7 @@
 html,
 body {
   height: 100%;
+  height: 100dvh;
   overflow: hidden;
 }
 
@@ -24,15 +31,6 @@ body {
 
 canvas {
   image-rendering: pixelated;
-}
-
-@media only screen and (max-width: 600px) {
-  body .app {
-    display: none;
-  }
-  body .warning p {
-    display: inline !important;
-  }
 }
 
 @keyframes rotating {
@@ -62,64 +60,301 @@ canvas {
   animation: rotating 5s linear infinite;
 }
 
-.tutorial {
+/* Welcome modal (replaces the 2019 tutorial image) */
+.welcome {
   position: absolute;
+  inset: 0;
   z-index: 888;
-  cursor: pointer;
-  align-self: center;
-  box-shadow: 0.1em 0.1em 1em 0.1em var(--blockly-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1em;
+  box-sizing: border-box;
+  background: rgba(0, 0, 0, 0.45);
 }
 
+.welcome-card,
+.welcome-card * {
+  font-family: "VCR OSD Mono", monospace;
+}
+
+.welcome-card {
+  width: min(600px, 100%);
+  max-height: 100%;
+  overflow: auto;
+  background: var(--dark-darker);
+  color: var(--blockly-green-light);
+  border: 2px solid var(--blockly-blue);
+  box-shadow: 0 0 1.2em 0.2em var(--blockly-blue);
+  text-transform: uppercase;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.welcome-card > * {
+  padding: 0.9em 1em;
+  border-bottom: 2px solid var(--blockly-blue);
+}
+
+.welcome-card h1 {
+  color: var(--blockly-blue);
+  font-size: 1.6em;
+  letter-spacing: 0.05em;
+}
+
+.welcome-card h2 {
+  color: var(--blockly-blue);
+  font-size: 1.5em;
+  margin-bottom: 0.3em;
+}
+
+.welcome-card p {
+  font-size: 0.8em;
+  line-height: 1.5;
+}
+
+.welcome-cats {
+  list-style: none;
+  padding: 0;
+  margin: 0.7em 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4em 0.9em;
+  font-size: 0.75em;
+  color: var(--text-color);
+  text-transform: none;
+}
+
+.welcome-cats i {
+  display: inline-block;
+  width: 0.6em;
+  height: 1em;
+  margin-right: 0.3em;
+  vertical-align: -0.15em;
+  background: var(--c);
+}
+
+.welcome-run {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  text-align: left;
+}
+
+.welcome-play {
+  flex: 0 0 auto;
+  width: 2.2em;
+  height: 2.2em;
+  padding: 0.3em;
+  box-sizing: border-box;
+  background: var(--blockly-green);
+  border: 3px solid var(--blockly-green-dark);
+  border-radius: 5px;
+  color: var(--dark-darker);
+}
+
+.welcome-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 0;
+}
+
+.welcome-cols > div {
+  padding: 1em;
+}
+
+.welcome-cols > div:first-child {
+  border-right: 2px solid var(--blockly-blue);
+}
+
+.welcome-demo {
+  margin-top: 0.8em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2em;
+}
+
+.welcome-dots {
+  width: 5em;
+  border-top: 3px dotted #00ccff;
+}
+
+.welcome-demo img {
+  height: 16px;
+  image-rendering: pixelated;
+}
+
+.welcome-start {
+  cursor: pointer;
+  font: inherit;
+  font-size: 1.3em;
+  letter-spacing: 0.1em;
+  color: var(--dark-darker);
+  background: var(--blockly-blue);
+  border: 0;
+  padding: 0.6em;
+}
+
+.welcome-start:hover {
+  filter: brightness(1.1);
+}
+
+@media (max-width: 480px) {
+  .welcome-cols {
+    grid-template-columns: 1fr;
+  }
+  .welcome-cols > div:first-child {
+    border-right: 0;
+    border-bottom: 2px solid var(--blockly-blue);
+  }
+}
+
+/* Layout: side by side on wide landscape screens, stacked otherwise. */
 .app {
   position: absolute;
   height: 100%;
+  height: 100dvh;
   width: 100%;
   background-color: var(--dark-primary);
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
   justify-content: center;
 }
 
 .toolbox {
-  height: 90%;
+  height: 100%;
   width: 50%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 #blocklyDiv {
   position: relative;
-  height: 100%;
+  flex: 1 1 auto;
+  min-height: 0;
   width: 100%;
 }
 
 #simulacao {
   height: 100%;
   width: 50%;
+  min-width: 0;
+  overflow: auto; /* harmless with FIT; needed if a rotation leaves a NONE canvas here */
   background-color: var(--dark-primary);
 }
 
 .botoes {
-  height: 10%;
+  flex: 0 0 auto;
   width: 100%;
+  min-height: 3.5em;
+  padding: 0.4em 0.5em;
+  box-sizing: border-box;
   background-color: var(--dark-primary);
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-around;
+  gap: 0.4em 0.6em;
 }
 
 .botoes .botao {
   position: relative;
   background-color: var(--blockly-green);
-  height: 50%;
-  width: 3em;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0.2em 0.4em;
   border: 5px solid var(--blockly-green-dark);
   border-top: 1px solid var(--blockly-green-lighter);
   border-radius: 5px;
+  touch-action: manipulation;
+}
+
+@media (max-width: 599px), (orientation: portrait) {
+  .app {
+    flex-direction: column;
+  }
+  .toolbox {
+    width: 100%;
+    height: auto;
+    flex: 1 1 55%;
+    min-height: 0;
+  }
+  #simulacao {
+    order: -1;
+    width: 100%;
+    height: auto;
+    flex: 1 1 45%;
+    min-height: 0;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x pan-y;
+  }
+  #simulacao canvas {
+    display: block;
+    touch-action: pan-x pan-y;
+  }
+  #simulacao {
+    scrollbar-width: thin;
+    scrollbar-color: var(--blockly-green) var(--dark-primary);
+  }
+  #simulacao::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  #simulacao::-webkit-scrollbar-track {
+    background: var(--dark-primary);
+  }
+  #simulacao::-webkit-scrollbar-thumb {
+    background: var(--blockly-green);
+    border-radius: 5px;
+  }
+  #simulacao::-webkit-scrollbar-corner {
+    background: var(--dark-primary);
+  }
+  .blocklyToolboxCategoryLabel {
+    font-size: 0.85em;
+  }
+}
+
+@media (max-width: 599px) {
+  .speedRoll {
+    width: 6em;
+  }
+}
+
+.botoes .botao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2em;
+  color: var(--dark-darker);
+  cursor: pointer;
+}
+
+.botoes .botao svg {
+  width: 22px;
+  height: 22px;
+  stroke-width: 2.5;
+}
+
+#play svg,
+#stop svg,
+.welcome-play {
+  fill: currentColor;
+}
+
+.botoes .botao b {
+  font-size: 0.7em;
 }
 
 .botoes .botao:disabled {
   border: 3px solid var(--dark-darker);
   background-color: var(--dark-lighter);
+  color: var(--dark-lightest);
   cursor: no-drop;
 }
 
@@ -170,15 +405,12 @@ canvas {
 .speedRoll::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 35px;
-  height: 35px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
-  background: transparent;
-  cursor: grabbing;
-  background-image: url("/assets/speed.png");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 1.5em;
+  background: var(--blockly-green-light);
+  cursor: pointer;
+  box-shadow: 0 0 12px var(--blockly-green-light);
 }
 
 .speedRoll::-moz-range-thumb {
@@ -191,9 +423,23 @@ canvas {
   box-shadow: 0 0 25px var(--blockly-green-light);
 }
 
-/* Hover labels */
-.botao,
+/* Sliders */
 .velocidade {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+}
+
+.slider-icon {
+  width: 1.4em;
+  height: 1.4em;
+  color: var(--text-color);
+  flex: 0 0 auto;
+}
+
+/* Hover labels */
+.botao {
   position: relative;
   display: inline;
 }
@@ -209,20 +455,22 @@ canvas {
   visibility: hidden;
 }
 
-.botao:hover span {
-  visibility: visible;
-  opacity: 1;
-  bottom: 2.5em;
-  left: -0.8em;
-  z-index: 999;
-}
+@media (hover: hover) {
+  .botao:hover span {
+    visibility: visible;
+    opacity: 1;
+    bottom: 2.5em;
+    left: -0.8em;
+    z-index: 999;
+  }
 
-.velocidade:hover > span {
-  visibility: visible;
-  opacity: 1;
-  bottom: 2em;
-  left: -0.8em;
-  z-index: 999;
+  .velocidade:hover > span {
+    visibility: visible;
+    opacity: 1;
+    bottom: 2em;
+    left: -0.8em;
+    z-index: 999;
+  }
 }
 
 .velocidade output {

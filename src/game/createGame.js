@@ -15,12 +15,22 @@ export function createGame({
   turtle,
   width = parent.clientWidth || FALLBACK_WIDTH,
   height = parent.clientHeight || FALLBACK_HEIGHT,
+  fit = true,
 }) {
   const game = new Phaser.Game({
     type: Phaser.AUTO,
     parent,
-    width,
-    height,
+    // fit: the canvas scales to the container on resize/rotation (drawing
+    // survives). !fit: the canvas keeps its real size and the container scrolls.
+    scale: {
+      mode: fit ? Phaser.Scale.FIT : Phaser.Scale.NONE,
+      autoCenter: fit ? Phaser.Scale.CENTER_BOTH : Phaser.Scale.NO_CENTER,
+      width,
+      height,
+    },
+    // The game takes no pointer input, so leave touch events to the page
+    // (needed for scrolling the canvas container on phones).
+    input: false,
     pixelArt: true,
     backgroundColor: "#212529",
     scene: [],
