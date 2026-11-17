@@ -140,3 +140,43 @@ describe("runner", () => {
     expect(onFinish).toHaveBeenCalledWith({ error: null });
   });
 });
+
+describe("runner turbo", () => {
+  it("needs far fewer ticks when speed is zero or negative (turbo)", () => {
+    const ticksFor = (speedMs) => {
+      const ws = new Blockly.Workspace();
+      program(ws, "pf", "pf", "pf", "pf", "pf", "pf", "pf", "pf");
+      const api = apiMock();
+      let ticks = 0;
+      const timers = {
+        setTimeout: (fn, ms) => {
+          ticks++;
+          return setTimeout(fn, ms);
+        },
+        clearTimeout,
+      };
+      const r = createRunner({ workspace: ws, api, speedMs, timers });
+      r.run();
+      vi.runAllTimers();
+      expect(api.jabutiPF).toHaveBeenCalledTimes(8);
+      expect(r.isRunning()).toBe(false);
+      return ticks;
+    };
+    const normal = ticksFor(1);
+    const turbo = ticksFor(-45); // slider at 100 → 55 - 100 → 10 steps per tick
+    expect(normal).toBeGreaterThan(20);
+    expect(turbo).toBeLessThanOrEqual(Math.ceil(normal / 10) + 1);
+  });
+
+  it("keeps one step per tick at positive speeds", () => {
+    const ws = new Blockly.Workspace();
+    program(ws, "pf", "pf", "pf");
+    const api = apiMock();
+    const r = createRunner({ workspace: ws, api, speedMs: 100 });
+    r.run();
+    vi.advanceTimersByTime(100);
+    expect(api.jabutiPF.mock.calls.length).toBeLessThanOrEqual(1);
+    vi.runAllTimers();
+    expect(api.jabutiPF).toHaveBeenCalledTimes(3);
+  });
+});

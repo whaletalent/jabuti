@@ -35,15 +35,18 @@ export function createRunner({
   const step = () => {
     timer = null;
     if (!running) return;
-    let more;
+    // speed > 0: one interpreter step every `speed` ms.
+    // speed <= 0 ("turbo"): several steps per tick with no delay.
+    const batch = speed > 0 ? 1 : 1 + Math.ceil(-speed / 5);
+    let more = true;
     try {
-      more = interpreter.step();
+      for (let i = 0; i < batch && more; i++) more = interpreter.step();
     } catch (error) {
       finish({ error });
       return;
     }
     if (more) {
-      timer = later(step, speed);
+      timer = later(step, Math.max(speed, 0));
     } else {
       finish({ error: null });
     }
@@ -65,7 +68,7 @@ export function createRunner({
     });
     running = true;
     onStart();
-    timer = later(step, speed);
+    timer = later(step, Math.max(speed, 0));
   };
 
   const stop = () => {
