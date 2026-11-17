@@ -20,12 +20,34 @@ loadExampleIfEmpty(workspace);
 window.addEventListener("resize", () => Blockly.svgResize(workspace));
 
 const parent = document.getElementById("simulacao");
-const width = parent.clientWidth || 800;
-const height = parent.clientHeight || 600;
+// Stacked (phone/tablet) layout: keep the canvas at its real 800x600 size and
+// let the container scroll. Side-by-side layout: fit the canvas to the column.
+const stacked = window.matchMedia(
+  "(max-width: 899px), (orientation: portrait)",
+).matches;
+const width = stacked
+  ? Math.max(parent.clientWidth, 800)
+  : parent.clientWidth || 800;
+const height = stacked
+  ? Math.max(parent.clientHeight, 600)
+  : parent.clientHeight || 600;
 const turtle = createTurtle({ width, height });
-const { ready } = createGame({ parent, turtle, width, height });
+const { ready } = createGame({
+  parent,
+  turtle,
+  width,
+  height,
+  fit: !stacked,
+});
 
 ready.then((scene) => {
+  if (stacked) {
+    // Start scrolled to the middle, where the turtle is.
+    parent.scrollTo(
+      (width - parent.clientWidth) / 2,
+      (height - parent.clientHeight) / 2,
+    );
+  }
   const api = {
     jabutiPF: () => scene.moveForward(),
     jabutiPT: () => scene.moveBack(),
