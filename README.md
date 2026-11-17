@@ -7,7 +7,7 @@ A programming-logic learning game: snap Blockly blocks together and a turtle wal
 
 **▶ Play it: https://whaletalent.github.io/jabuti/**
 
-![Jabuti: the block toolbox, a "repita 36 vezes { pf; pd 15° }" program and the dotted circle it draws](docs/screenshot.png)
+![Jabuti: the block toolbox, a "repita 36 vezes { pf; pd 15° }" program and the cyan circle it draws](docs/screenshot.png)
 
 ## What it is
 
@@ -34,10 +34,10 @@ Controls: "Executar" runs the program and is re-enabled when it ends, so success
 ## How it works
 
 1. Blockly turns the block workspace into JavaScript, prefixing each statement with a `highlightBlock(id)` call.
-2. JS-Interpreter runs that code in a sandbox, one interpreter step per tick (the delay between ticks is 55 minus the speed slider value, in ms).
+2. JS-Interpreter runs that code in a sandbox, one interpreter step per tick (the delay between ticks is 55 minus the speed slider value, in ms; above 50 the delay is zero and several steps run per tick, up to 10 at the maximum).
 3. The sandbox can only call a small API: `jabutiPF`, `jabutiPT`, `jabutiPD`, `jabutiPE`, `setColor` and `highlightBlock`.
 4. Those calls update a plain turtle state (position, heading, colour, step) in `src/game/turtle.js`, which has no Phaser dependency and is unit-tested.
-5. The Phaser scene moves the sprite and stamps one trail dot per move onto a render texture.
+5. The Phaser scene moves the sprite and draws a line segment from the previous position to the new one onto a render texture.
 
 ## Tech stack
 

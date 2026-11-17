@@ -20,7 +20,6 @@ export class TurtleScene extends Phaser.Scene {
   preload() {
     const base = `${import.meta.env.BASE_URL}assets/`;
     this.load.image("fundo", `${base}fundo.png`);
-    this.load.image("trail", `${base}trail.png`);
     this.load.image("jabuti", `${base}jabuti.png`);
   }
 
@@ -29,6 +28,7 @@ export class TurtleScene extends Phaser.Scene {
     this.add.tileSprite(0, 0, width, height, "fundo").setOrigin(0);
     this.trail = this.add.renderTexture(0, 0, width, height).setOrigin(0);
     this.player = this.add.image(this.turtle.x, this.turtle.y, "jabuti");
+    this.pen = this.make.graphics({ add: false });
   }
 
   update() {
@@ -37,23 +37,30 @@ export class TurtleScene extends Phaser.Scene {
     this.player.angle = this.turtle.heading;
   }
 
-  stampTrail() {
-    this.trail.stamp("trail", 0, this.turtle.x, this.turtle.y, {
-      tint: this.turtle.colour,
-      originX: 0.5,
-      originY: 0.5,
-    });
+  drawSegment(x0, y0, x1, y1) {
+    const { colour } = this.turtle;
+    this.pen.clear();
+    this.pen.lineStyle(3, colour, 1);
+    this.pen.beginPath();
+    this.pen.moveTo(x0, y0);
+    this.pen.lineTo(x1, y1);
+    this.pen.strokePath();
+    this.pen.fillStyle(colour, 1);
+    this.pen.fillCircle(x1, y1, 1.5);
+    this.trail.draw(this.pen);
     this.trail.render();
   }
 
   moveForward() {
+    const { x, y } = this.turtle;
     forward(this.turtle);
-    this.stampTrail();
+    this.drawSegment(x, y, this.turtle.x, this.turtle.y);
   }
 
   moveBack() {
+    const { x, y } = this.turtle;
     back(this.turtle);
-    this.stampTrail();
+    this.drawSegment(x, y, this.turtle.x, this.turtle.y);
   }
 
   turnRight(deg) {
