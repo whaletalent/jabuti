@@ -7,6 +7,10 @@ updates:
     groups:
       minor-and-patch:
         update-types: [minor, patch]
+    # blockly@13 declares the peer range jsdom >=27.4.0 <31.0.0
+    ignore:
+      - dependency-name: jsdom
+        update-types: ["version-update:semver-major"]
   - package-ecosystem: github-actions
     directory: /
     schedule:
