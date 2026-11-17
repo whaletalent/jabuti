@@ -11,9 +11,6 @@ export function bindUi({ runner, workspace, scene, turtle, doc = document }) {
     scene.resetScene();
     stop.disabled = true;
   });
-  $("clear").addEventListener("click", () => {
-    if (confirm("Remover os blocos da tela?")) workspace.clear();
-  });
   $("undo").addEventListener("click", () => workspace.undo(false));
   $("redo").addEventListener("click", () => workspace.undo(true));
 

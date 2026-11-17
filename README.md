@@ -11,7 +11,7 @@ A programming-logic learning game: snap Blockly blocks together and a turtle wal
 
 ## What it is
 
-Jabuti ("tortoise" in Portuguese) is an educational, Logo-style game. Players build a program out of visual blocks (move, turn, repeat, set colour, use variables and functions) and press "Executar" to watch the turtle draw it. The workspace opens with a ready-made example (set the colour to cyan, then repeat 36 times: forward, turn right 15°) that draws a circle; run it, change it or clear it and start from scratch. It is meant to introduce programming logic to Brazilian kids, so the interface is in Portuguese (pt-BR); this README is in English. It needs a screen at least 600 px wide; narrower screens show a warning instead of the app.
+Jabuti ("tortoise" in Portuguese) is an educational, Logo-style game. Players build a program out of visual blocks (move, turn, repeat, set colour, use variables and functions) and press "Executar" to watch the turtle draw it. The workspace opens with a ready-made example (set the colour to cyan, then repeat 36 times: forward, turn right 15°) that draws a circle; run it, change it or clear it and start from scratch. It is meant to introduce programming logic to Brazilian kids, so the interface is in Portuguese (pt-BR); this README is in English. It works on desktops, tablets and phones: on narrow or portrait screens the canvas sits above the block editor.
 
 ## The blocks
 
@@ -29,7 +29,7 @@ The "Movimento" category holds the turtle blocks:
 
 The rest of the toolbox is standard Blockly. The seven categories are Movimento, Lógica, Repetição, Matemática, Cores, Variáveis and Funções.
 
-Controls: "Executar" runs the program and is re-enabled when it ends, so successive runs accumulate on the canvas. "Parar Execução" stops it, clears the trail and re-centres the turtle. "Limpar Tela" removes all blocks (after a confirmation), and "Desfazer" / "Refazer" are undo and redo. Two sliders set the speed ("Velocidade de Execução") and the step length in pixels ("Tamanho do passo", 1 to 32, default 8).
+Controls: "Executar" runs the program and is re-enabled when it ends, so successive runs accumulate on the canvas. "Parar Execução" stops it, clears the trail and re-centres the turtle. "Desfazer" / "Refazer" are undo and redo; drag blocks to the trash can in the editor to delete them. Two sliders set the speed ("Velocidade de Execução") and the step length in pixels ("Tamanho do passo", 1 to 32, default 8).
 
 ## How it works
 

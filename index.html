@@ -26,10 +26,6 @@
             <span>Parar Execução</span>
             <img src="/assets/stop.png" alt="" />
           </button>
-          <button class="botao" id="clear">
-            <span>Limpar Tela</span>
-            <img src="/assets/trashcan.png" alt="" />
-          </button>
           <button class="botao" id="undo">
             <span>Desfazer</span>
             <img src="/assets/undo.png" alt="" />
@@ -40,6 +36,11 @@
           </button>
           <div class="velocidade">
             <span>Velocidade de Execução</span>
+            <img
+              class="slider-icon"
+              src="/assets/speed.png"
+              alt="Velocidade de execução"
+            />
             <input
               type="range"
               value="25"
@@ -52,6 +53,19 @@
           </div>
           <div class="velocidade">
             <span>Tamanho do passo</span>
+            <svg
+              class="slider-icon"
+              viewBox="0 0 16 16"
+              shape-rendering="crispEdges"
+              role="img"
+              aria-label="Tamanho do passo"
+            >
+              <rect x="1" y="5" width="14" height="6" fill="#ddd" />
+              <rect x="3" y="5" width="1" height="3" fill="#212529" />
+              <rect x="6" y="5" width="1" height="2" fill="#212529" />
+              <rect x="9" y="5" width="1" height="3" fill="#212529" />
+              <rect x="12" y="5" width="1" height="2" fill="#212529" />
+            </svg>
             <input
               type="range"
               value="8"

@@ -4,14 +4,14 @@ import { bindUi } from "../src/ui.js";
 
 const dom = () => {
   document.body.innerHTML = `
-    <button id="play"></button><button id="stop" disabled></button><button id="clear"></button>
+    <button id="play"></button><button id="stop" disabled></button>
     <button id="undo"></button><button id="redo"></button>
     <input id="velocidade" type="range" value="25"><input id="passo" type="range" value="8"><output id="passo-valor">8</output>
     <div id="preloader"></div><img id="tutorial">`;
 };
 const deps = () => ({
   runner: { run: vi.fn(), stop: vi.fn(), setSpeed: vi.fn() },
-  workspace: { clear: vi.fn(), undo: vi.fn() },
+  workspace: { undo: vi.fn() },
   scene: { resetScene: vi.fn() },
   turtle: { step: 8 },
 });

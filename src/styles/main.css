@@ -135,6 +135,7 @@ canvas {
     min-height: 0;
   }
   #simulacao {
+    order: -1;
     width: 100%;
     height: auto;
     flex: 1 1 45%;
@@ -145,39 +146,10 @@ canvas {
   }
 }
 
-/* Touch screens have no hover: show the control labels as captions. */
-@media (hover: none), (max-width: 899px) {
-  .botoes .botao {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.15em;
-  }
-  .botoes .botao span,
-  .velocidade > span {
-    position: static;
-    visibility: visible;
-    background: transparent;
-    color: var(--text-color);
-    font-size: 0.6em;
-    white-space: nowrap;
-    padding: 0;
-  }
-  .velocidade {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.1em;
-  }
+@media (max-width: 899px) {
   .speedRoll {
-    width: 7em;
+    width: 6em;
   }
-}
-
-.botoes .botao:disabled {
-  border: 3px solid var(--dark-darker);
-  background-color: var(--dark-lighter);
-  cursor: no-drop;
 }
 
 /* Blockly config */
@@ -248,9 +220,23 @@ canvas {
   box-shadow: 0 0 25px var(--blockly-green-light);
 }
 
-/* Hover labels */
-.botao,
+/* Sliders */
 .velocidade {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+}
+
+.slider-icon {
+  width: 1.5em;
+  height: 1.5em;
+  image-rendering: pixelated;
+  flex: 0 0 auto;
+}
+
+/* Hover labels */
+.botao {
   position: relative;
   display: inline;
 }
