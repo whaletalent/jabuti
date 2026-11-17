@@ -11,7 +11,7 @@ A programming-logic learning game: snap Blockly blocks together and a turtle wal
 
 ## What it is
 
-Jabuti ("tortoise" in Portuguese) is an educational, Logo-style game. Players build a program out of visual blocks (move, turn, repeat, set colour, use variables and functions) and press "Executar" to watch the turtle draw it. It is meant to introduce programming logic to Brazilian kids, so the interface is in Portuguese (pt-BR); this README is in English. It needs a screen at least 600 px wide; narrower screens show a warning instead of the app.
+Jabuti ("tortoise" in Portuguese) is an educational, Logo-style game. Players build a program out of visual blocks (move, turn, repeat, set colour, use variables and functions) and press "Executar" to watch the turtle draw it. The workspace opens with a ready-made example (set the colour to cyan, then repeat 36 times: forward, turn right 15°) that draws a circle; run it, change it or clear it and start from scratch. It is meant to introduce programming logic to Brazilian kids, so the interface is in Portuguese (pt-BR); this README is in English. It needs a screen at least 600 px wide; narrower screens show a warning instead of the app.
 
 ## The blocks
 
