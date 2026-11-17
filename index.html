@@ -14,9 +14,15 @@
     </div>
 
     <div class="app">
-      <div id="welcome" class="welcome" role="dialog" aria-modal="true">
+      <div
+        id="welcome"
+        class="welcome"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="welcome-title"
+      >
         <div class="welcome-card">
-          <h1 data-i18n="welcome.title"></h1>
+          <h1 id="welcome-title" data-i18n="welcome.title"></h1>
           <section>
             <p data-i18n="welcome.intro"></p>
             <ul class="welcome-cats">
@@ -77,49 +83,23 @@
       <div class="toolbox">
         <div id="blocklyDiv"></div>
         <div class="botoes">
-          <button
-            class="botao"
-            id="play"
-            data-i18n-title="ui.run"
-            data-i18n-aria="ui.run"
-          >
+          <button class="botao" id="play" data-i18n-aria="ui.run">
             <span data-i18n="ui.run"></span>
             <i data-lucide="play" aria-hidden="true"></i>
           </button>
-          <button
-            class="botao"
-            id="stop"
-            data-i18n-title="ui.stop"
-            data-i18n-aria="ui.stop"
-            disabled
-          >
+          <button class="botao" id="stop" data-i18n-aria="ui.stop" disabled>
             <span data-i18n="ui.stop"></span>
             <i data-lucide="square" aria-hidden="true"></i>
           </button>
-          <button
-            class="botao"
-            id="undo"
-            data-i18n-title="ui.undo"
-            data-i18n-aria="ui.undo"
-          >
+          <button class="botao" id="undo" data-i18n-aria="ui.undo">
             <span data-i18n="ui.undo"></span>
             <i data-lucide="undo-2" aria-hidden="true"></i>
           </button>
-          <button
-            class="botao"
-            id="redo"
-            data-i18n-title="ui.redo"
-            data-i18n-aria="ui.redo"
-          >
+          <button class="botao" id="redo" data-i18n-aria="ui.redo">
             <span data-i18n="ui.redo"></span>
             <i data-lucide="redo-2" aria-hidden="true"></i>
           </button>
-          <button
-            class="botao"
-            id="lang"
-            data-i18n-title="ui.lang"
-            data-i18n-aria="ui.lang"
-          >
+          <button class="botao" id="lang" data-i18n-aria="ui.lang">
             <span data-i18n="ui.lang"></span>
             <i data-lucide="languages" aria-hidden="true"></i>
             <b id="lang-code"></b>
@@ -135,6 +115,7 @@
               step="5"
               class="speedRoll"
               id="velocidade"
+              data-i18n-aria="ui.speed"
             />
           </div>
           <div class="velocidade">
@@ -147,6 +128,7 @@
               max="32"
               class="speedRoll"
               id="passo"
+              data-i18n-aria="ui.step"
             />
             <output id="passo-valor">8</output>
           </div>

@@ -16,12 +16,13 @@ describe("i18n", () => {
     );
   });
 
-  it("detects the language: stored choice wins, otherwise English", () => {
-    expect(detectLang({ stored: "pt", navigatorLang: "en-US" })).toBe("pt");
-    expect(detectLang({ stored: "en", navigatorLang: "pt-BR" })).toBe("en");
-    expect(detectLang({ stored: null, navigatorLang: "pt-BR" })).toBe("en");
-    expect(detectLang({ stored: "xx", navigatorLang: "pt-BR" })).toBe("en");
-    expect(detectLang({ stored: null, navigatorLang: undefined })).toBe("en");
+  it("detects the language: URL query, then stored choice, otherwise English", () => {
+    expect(detectLang({ query: "pt", stored: "en" })).toBe("pt");
+    expect(detectLang({ query: null, stored: "pt" })).toBe("pt");
+    expect(detectLang({ query: "xx", stored: "pt" })).toBe("pt");
+    expect(detectLang({ query: null, stored: null })).toBe("en");
+    expect(detectLang({ query: null, stored: "xx" })).toBe("en");
+    expect(detectLang({})).toBe("en");
   });
 
   it("translates keys and falls back to the key itself", () => {

@@ -7,7 +7,7 @@ const dom = () => {
     <button id="play"></button><button id="stop" disabled></button>
     <button id="undo"></button><button id="redo"></button>
     <input id="velocidade" type="range" value="25"><input id="passo" type="range" value="8"><output id="passo-valor">8</output>
-    <div id="preloader"></div><div id="welcome"></div><button id="start"></button>`;
+    <div id="preloader"></div><div id="welcome"></div><button id="start"></button><button id="lang"></button>`;
 };
 const deps = () => ({
   runner: { run: vi.fn(), stop: vi.fn(), setSpeed: vi.fn() },
@@ -55,5 +55,16 @@ describe("ui", () => {
     expect(d.scene.resetScene).toHaveBeenCalledOnce();
     document.getElementById("redo").click();
     expect(d.workspace.undo).toHaveBeenCalledWith(true);
+  });
+
+  it("start hides the welcome dialog and the language button calls back", () => {
+    dom();
+    const d = deps();
+    const onToggleLang = vi.fn();
+    bindUi({ ...d, onToggleLang });
+    document.getElementById("start").click();
+    expect(document.getElementById("welcome").style.display).toBe("none");
+    document.getElementById("lang").click();
+    expect(onToggleLang).toHaveBeenCalledOnce();
   });
 });

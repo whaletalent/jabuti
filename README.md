@@ -11,7 +11,7 @@ A programming-logic learning game: snap Blockly blocks together and a turtle wal
 
 ## What it is
 
-Jabuti ("tortoise" in Portuguese) is an educational, Logo-style game. Players build a program out of visual blocks (move, turn, repeat, set colour, use variables and functions) and press "Executar" to watch the turtle draw it. The workspace opens with a ready-made example (six times: cyan, five steps turning 15°, then pink, five steps turning 45°) that draws a two-colour flower; run it, change it or delete the blocks and start from scratch. It is meant to introduce programming logic to Brazilian kids, so the interface is available in English (default) and Portuguese (pt-BR), switched with the language button; this README is in English. It works on desktops, tablets and phones: on narrow or portrait screens the canvas sits above the block editor.
+Jabuti ("tortoise" in Portuguese) is an educational, Logo-style game. Players build a program out of visual blocks (move, turn, repeat, set colour, use variables and functions) and press "Executar" to watch the turtle draw it. The workspace opens with a ready-made example (six times: cyan, five steps turning 15°, then pink, five steps turning 45°) that draws a two-colour flower; run it, change it or delete the blocks and start from scratch. It was made to introduce programming logic to Brazilian kids; the interface opens in English and switches to Portuguese (pt-BR) with the language button (the choice is remembered, and `?lang=pt` or `?lang=en` in the URL forces one). This README is in English. It works on desktops, tablets and phones: on narrow or portrait screens the canvas sits above the block editor.
 
 ## The blocks
 
@@ -29,7 +29,7 @@ The "Movimento" category holds the turtle blocks:
 
 The rest of the toolbox is standard Blockly. The seven categories are Movimento, Lógica, Repetição, Matemática, Cores, Variáveis and Funções.
 
-Controls: "Executar" runs the program and is re-enabled when it ends, so successive runs accumulate on the canvas. "Parar Execução" stops it, clears the trail and re-centres the turtle. "Desfazer" / "Refazer" are undo and redo; drag blocks to the trash can in the editor to delete them. Two sliders set the speed ("Velocidade de Execução") and the step length in pixels ("Tamanho do passo", 1 to 32, default 8).
+Controls (icon buttons, labels on hover): Run starts the program and is re-enabled when it ends, so successive runs accumulate on the canvas. Stop halts it, clears the trail and re-centres the turtle, and stays available after a run as a reset. Undo / Redo act on the blocks; drag blocks to the trash can in the editor to delete them. The language button switches between English and Portuguese. Two sliders set the speed (gauge icon; above the middle the run goes into a no-delay turbo) and the step length in pixels (ruler icon, 1 to 32, default 8).
 
 ## How it works
 
@@ -82,13 +82,17 @@ Then open <http://localhost:5173/jabuti/>. The app is served under `/jabuti/` be
 ## Project structure
 
 ```
-index.html            app shell: toolbox, canvas mount, buttons, sliders
+index.html            app shell: welcome dialog, toolbox, canvas mount, controls
 vite.config.js        base path /jabuti/ and test setup
-public/assets/        sprites, icons and the tutorial image
+public/assets/        sprites (turtle, background, block icons)
+public/fonts/         VCR OSD Mono, used by the welcome dialog
 src/
-  main.js             boot: Blockly, Phaser, runner and UI wiring
+  main.js             boot: language, icons, Blockly, Phaser, runner and UI wiring
+  layout.js           stacked-vs-side-by-side media query and canvas sizing
+  session.js          hands the program over a language switch (sessionStorage)
   runner.js           JS-Interpreter wrapper: run, step, stop, highlight
-  ui.js               buttons, sliders, preloader
+  ui.js               buttons, sliders, preloader, welcome dialog, language toggle
+  i18n/               messages (pt, en), language detection, DOM translation
   blocks/             block definitions, generators, toolbox, Blockly setup
   game/               turtle.js (pure state), scene.js (Phaser), createGame.js
   styles/main.css

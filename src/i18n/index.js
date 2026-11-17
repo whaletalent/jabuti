@@ -4,9 +4,18 @@ export { messages };
 export const LANGS = ["pt", "en"];
 const STORAGE_KEY = "jabuti.lang";
 
-/** The stored choice wins; otherwise the game opens in English. */
-export function detectLang({ stored }) {
+/** A `?lang=` query wins, then the stored choice; otherwise English. */
+export function detectLang({ query, stored } = {}) {
+  if (LANGS.includes(query)) return query;
   return LANGS.includes(stored) ? stored : "en";
+}
+
+function readQuery() {
+  try {
+    return new URLSearchParams(location.search).get("lang");
+  } catch {
+    return null;
+  }
 }
 
 function readStored() {
@@ -21,7 +30,9 @@ let current = null;
 
 export function getLang() {
   if (!current) {
-    current = detectLang({ stored: readStored() });
+    const query = readQuery();
+    current = detectLang({ query, stored: readStored() });
+    if (LANGS.includes(query)) setLang(query); // remember a shared ?lang= link
   }
   return current;
 }

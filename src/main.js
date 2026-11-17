@@ -8,6 +8,8 @@ import { createGame } from "./game/createGame.js";
 import { createRunner } from "./runner.js";
 import { bindUi } from "./ui.js";
 import { getLang, setLang, translateDocument } from "./i18n/index.js";
+import { STACKED_QUERY, canvasSize } from "./layout.js";
+import { saveSession, takeSession } from "./session.js";
 import {
   createIcons,
   Play,
@@ -31,21 +33,27 @@ const workspace = Blockly.inject("blocklyDiv", {
   horizontalLayout: true,
   scrollbars: true,
 });
-loadExampleIfEmpty(workspace);
-window.addEventListener("resize", () => Blockly.svgResize(workspace));
+// A language switch hands the program over the reload; otherwise show the example.
+const session = takeSession(sessionStorage);
+if (session) {
+  Blockly.serialization.workspaces.load(session.workspace, workspace);
+  document.getElementById("velocidade").value = session.speed;
+  document.getElementById("passo").value = session.step;
+  document.getElementById("welcome").style.display = "none";
+} else {
+  loadExampleIfEmpty(workspace);
+  document.getElementById("start").focus();
+}
 
 const parent = document.getElementById("simulacao");
 // Stacked (phone/tablet) layout: keep the canvas at its real 800x600 size and
 // let the container scroll. Side-by-side layout: fit the canvas to the column.
-const stacked = window.matchMedia(
-  "(max-width: 899px), (orientation: portrait)",
-).matches;
-const width = stacked
-  ? Math.max(parent.clientWidth, 800)
-  : parent.clientWidth || 800;
-const height = stacked
-  ? Math.max(parent.clientHeight, 600)
-  : parent.clientHeight || 600;
+const stacked = window.matchMedia(STACKED_QUERY).matches;
+const { width, height } = canvasSize({
+  stacked,
+  clientWidth: parent.clientWidth,
+  clientHeight: parent.clientHeight,
+});
 const turtle = createTurtle({ width, height });
 const { ready } = createGame({
   parent,
@@ -88,8 +96,16 @@ ready.then((scene) => {
     scene,
     turtle,
     onToggleLang: () => {
-      setLang(lang === "pt" ? "en" : "pt");
-      location.reload();
+      const next = lang === "pt" ? "en" : "pt";
+      saveSession(sessionStorage, {
+        workspace: Blockly.serialization.workspaces.save(workspace),
+        speed: document.getElementById("velocidade").value,
+        step: document.getElementById("passo").value,
+      });
+      setLang(next);
+      const url = new URL(location.href);
+      url.searchParams.set("lang", next);
+      location.assign(url);
     },
   });
 });
