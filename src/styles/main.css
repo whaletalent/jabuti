@@ -1,13 +1,13 @@
 :root {
   --dark-primary: #212529;
-  --dark-lighter: #373b3f;
-  --dark-lightest: #4d5155;
-  --dark-darker: #1e2225;
+  --dark-lighter: #383f45;
+  --dark-lightest: #4e5862;
+  --dark-darker: #1a1d21;
   --text-color: #ddd;
   --blockly-green: #5ba55b;
-  --blockly-green-dark: #2e532e;
-  --blockly-green-light: #a2d1a2;
-  --blockly-green-lighter: #c6e3c6;
+  --blockly-green-dark: #376337;
+  --blockly-green-light: #7cb77c;
+  --blockly-green-lighter: #ffffff;
   --blockly-blue: #5a9ea4;
 }
 
@@ -126,7 +126,7 @@ canvas {
 /* Blockly config */
 .blocklySvg {
   background-color: var(--dark-primary);
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 1.9);
+  box-shadow: inset 0 0 10px black;
 }
 
 .blocklyScrollbarHandle {
@@ -138,16 +138,16 @@ canvas {
   fill: var(--blockly-green);
 }
 
-.blocklyToolboxDiv {
+.blocklyToolbox {
   background-color: var(--dark-lighter);
 }
 
-.blocklyToolboxDiv .blocklyTreeLabel,
-.blocklyToolboxCategory .blocklyToolboxCategoryLabel {
+.blocklyToolboxCategoryLabel {
   color: var(--text-color);
 }
 
-.blocklyHorizontalTree:hover {
+.blocklyToolboxCategory:hover,
+.blocklyToolboxSelected {
   background-color: var(--dark-lightest) !important;
 }
 
