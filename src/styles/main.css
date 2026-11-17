@@ -329,6 +329,12 @@ canvas {
   stroke-width: 2.5;
 }
 
+#play svg,
+#stop svg,
+.welcome-play {
+  fill: currentColor;
+}
+
 .botoes .botao b {
   font-size: 0.7em;
 }

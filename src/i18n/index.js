@@ -4,14 +4,9 @@ export { messages };
 export const LANGS = ["pt", "en"];
 const STORAGE_KEY = "jabuti.lang";
 
-/** Stored choice wins; otherwise a Portuguese browser gets pt, anything else en. */
-export function detectLang({ stored, navigatorLang }) {
-  if (LANGS.includes(stored)) return stored;
-  return String(navigatorLang || "")
-    .toLowerCase()
-    .startsWith("pt")
-    ? "pt"
-    : "en";
+/** The stored choice wins; otherwise the game opens in English. */
+export function detectLang({ stored }) {
+  return LANGS.includes(stored) ? stored : "en";
 }
 
 function readStored() {
@@ -26,10 +21,7 @@ let current = null;
 
 export function getLang() {
   if (!current) {
-    current = detectLang({
-      stored: readStored(),
-      navigatorLang: typeof navigator !== "undefined" ? navigator.language : "",
-    });
+    current = detectLang({ stored: readStored() });
   }
   return current;
 }
