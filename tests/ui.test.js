@@ -7,7 +7,7 @@ const dom = () => {
     <button id="play"></button><button id="stop" disabled></button>
     <button id="undo"></button><button id="redo"></button>
     <input id="velocidade" type="range" value="25"><input id="passo" type="range" value="8"><output id="passo-valor">8</output>
-    <div id="preloader"></div><img id="tutorial">`;
+    <div id="preloader"></div><div id="welcome"></div><button id="start"></button>`;
 };
 const deps = () => ({
   runner: { run: vi.fn(), stop: vi.fn(), setSpeed: vi.fn() },

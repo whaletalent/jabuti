@@ -54,15 +54,152 @@ canvas {
   animation: rotating 5s linear infinite;
 }
 
-.tutorial {
+/* Welcome modal (replaces the 2019 tutorial image) */
+.welcome {
   position: absolute;
+  inset: 0;
   z-index: 888;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1em;
+  box-sizing: border-box;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.welcome-card {
+  width: min(600px, 100%);
+  max-height: 100%;
+  overflow: auto;
+  background: var(--dark-darker);
+  color: var(--blockly-green-light);
+  border: 2px solid var(--blockly-blue);
+  box-shadow: 0 0 1.2em 0.2em var(--blockly-blue);
+  font-family: "VCR OSD Mono", monospace;
+  text-transform: uppercase;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.welcome-card > * {
+  padding: 0.9em 1em;
+  border-bottom: 2px solid var(--blockly-blue);
+}
+
+.welcome-card h1 {
+  color: var(--blockly-blue);
+  font-size: 1.6em;
+  letter-spacing: 0.05em;
+}
+
+.welcome-card h2 {
+  color: var(--blockly-blue);
+  font-size: 1.5em;
+  margin-bottom: 0.3em;
+}
+
+.welcome-card p {
+  font-size: 0.8em;
+  line-height: 1.5;
+}
+
+.welcome-cats {
+  list-style: none;
+  padding: 0;
+  margin: 0.7em 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4em 0.9em;
+  font-size: 0.75em;
+  color: var(--text-color);
+  text-transform: none;
+}
+
+.welcome-cats i {
+  display: inline-block;
+  width: 0.6em;
+  height: 1em;
+  margin-right: 0.3em;
+  vertical-align: -0.15em;
+  background: var(--c);
+}
+
+.welcome-run {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  text-align: left;
+}
+
+.welcome-play {
+  flex: 0 0 auto;
+  width: 2.2em;
+  height: 2.2em;
+  padding: 0.3em;
+  box-sizing: border-box;
+  background: var(--blockly-green);
+  border: 3px solid var(--blockly-green-dark);
+  border-radius: 5px;
+  color: var(--dark-darker);
+}
+
+.welcome-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 0;
+}
+
+.welcome-cols > div {
+  padding: 1em;
+}
+
+.welcome-cols > div:first-child {
+  border-right: 2px solid var(--blockly-blue);
+}
+
+.welcome-demo {
+  margin-top: 0.8em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2em;
+}
+
+.welcome-dots {
+  width: 5em;
+  border-top: 3px dotted #00ccff;
+}
+
+.welcome-demo img {
+  height: 16px;
+  image-rendering: pixelated;
+}
+
+.welcome-start {
   cursor: pointer;
-  align-self: center;
-  max-width: min(600px, 92vw);
-  max-height: 92vh;
-  height: auto;
-  box-shadow: 0.1em 0.1em 1em 0.1em var(--blockly-blue);
+  font: inherit;
+  font-size: 1.3em;
+  letter-spacing: 0.1em;
+  color: var(--dark-darker);
+  background: var(--blockly-blue);
+  border: 0;
+  padding: 0.6em;
+}
+
+.welcome-start:hover {
+  filter: brightness(1.1);
+}
+
+@media (max-width: 480px) {
+  .welcome-cols {
+    grid-template-columns: 1fr;
+  }
+  .welcome-cols > div:first-child {
+    border-right: 0;
+    border-bottom: 2px solid var(--blockly-blue);
+  }
 }
 
 /* Layout: side by side on wide landscape screens, stacked otherwise. */
@@ -148,6 +285,24 @@ canvas {
     display: block;
     touch-action: pan-x pan-y;
   }
+  #simulacao {
+    scrollbar-width: thin;
+    scrollbar-color: var(--blockly-green) var(--dark-primary);
+  }
+  #simulacao::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  #simulacao::-webkit-scrollbar-track {
+    background: var(--dark-primary);
+  }
+  #simulacao::-webkit-scrollbar-thumb {
+    background: var(--blockly-green);
+    border-radius: 5px;
+  }
+  #simulacao::-webkit-scrollbar-corner {
+    background: var(--dark-primary);
+  }
   .blocklyToolboxCategoryLabel {
     font-size: 0.85em;
   }
@@ -157,6 +312,32 @@ canvas {
   .speedRoll {
     width: 6em;
   }
+}
+
+.botoes .botao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2em;
+  color: var(--dark-darker);
+  cursor: pointer;
+}
+
+.botoes .botao svg {
+  width: 22px;
+  height: 22px;
+  stroke-width: 2.5;
+}
+
+.botoes .botao b {
+  font-size: 0.7em;
+}
+
+.botoes .botao:disabled {
+  border: 3px solid var(--dark-darker);
+  background-color: var(--dark-lighter);
+  color: var(--dark-lightest);
+  cursor: no-drop;
 }
 
 /* Blockly config */
@@ -206,15 +387,12 @@ canvas {
 .speedRoll::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 35px;
-  height: 35px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
-  background: transparent;
-  cursor: grabbing;
-  background-image: url("/assets/speed.png");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 1.5em;
+  background: var(--blockly-green-light);
+  cursor: pointer;
+  box-shadow: 0 0 12px var(--blockly-green-light);
 }
 
 .speedRoll::-moz-range-thumb {
@@ -236,9 +414,9 @@ canvas {
 }
 
 .slider-icon {
-  width: 1.5em;
-  height: 1.5em;
-  image-rendering: pixelated;
+  width: 1.4em;
+  height: 1.4em;
+  color: var(--text-color);
   flex: 0 0 auto;
 }
 

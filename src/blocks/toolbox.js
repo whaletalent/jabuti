@@ -1,4 +1,5 @@
 // Toolbox ported from the 2019 XML (v1-legacy:public/turtle.html) to Blockly JSON.
+import { t } from "../i18n/index.js";
 
 const num = (value) => ({
   shadow: { type: "math_number", fields: { NUM: value } },
@@ -7,22 +8,28 @@ const colour = (value) => ({
   shadow: { type: "colour_picker", fields: { COLOUR: value } },
 });
 
-export const CATEGORY_NAMES = [
-  "Movimento",
-  "Lógica",
-  "Repetição",
-  "Matemática",
-  "Cores",
-  "Variáveis",
-  "Funções",
+const CATEGORY_KEYS = [
+  "movimento",
+  "logica",
+  "repeticao",
+  "matematica",
+  "cores",
+  "variaveis",
+  "funcoes",
 ];
 
-export const toolbox = {
+export const categoryNames = (lang = "pt") =>
+  CATEGORY_KEYS.map((k) => t(`category.${k}`, lang));
+
+/** Category names in the source language (pt), as in the 2019 toolbox. */
+export const CATEGORY_NAMES = categoryNames("pt");
+
+export const buildToolbox = (lang = "pt") => ({
   kind: "categoryToolbox",
   contents: [
     {
       kind: "category",
-      name: "Movimento",
+      name: t("category.movimento", lang),
       colour: "185",
       contents: [
         { kind: "block", type: "pf" },
@@ -35,7 +42,7 @@ export const toolbox = {
     },
     {
       kind: "category",
-      name: "Lógica",
+      name: t("category.logica", lang),
       colour: "210",
       contents: [
         { kind: "block", type: "controls_if" },
@@ -49,7 +56,7 @@ export const toolbox = {
     },
     {
       kind: "category",
-      name: "Repetição",
+      name: t("category.repeticao", lang),
       colour: "120",
       contents: [
         {
@@ -67,7 +74,7 @@ export const toolbox = {
     },
     {
       kind: "category",
-      name: "Matemática",
+      name: t("category.matematica", lang),
       colour: "230",
       contents: [
         { kind: "block", type: "math_number", fields: { NUM: 1 } },
@@ -100,7 +107,7 @@ export const toolbox = {
     },
     {
       kind: "category",
-      name: "Cores",
+      name: t("category.cores", lang),
       colour: "20",
       contents: [
         { kind: "block", type: "color" },
@@ -123,10 +130,23 @@ export const toolbox = {
         },
       ],
     },
-    { kind: "category", name: "Variáveis", colour: "330", custom: "VARIABLE" },
-    { kind: "category", name: "Funções", colour: "290", custom: "PROCEDURE" },
+    {
+      kind: "category",
+      name: t("category.variaveis", lang),
+      colour: "330",
+      custom: "VARIABLE",
+    },
+    {
+      kind: "category",
+      name: t("category.funcoes", lang),
+      colour: "290",
+      custom: "PROCEDURE",
+    },
   ],
-};
+});
+
+/** The toolbox in the source language (pt). */
+export const toolbox = buildToolbox("pt");
 
 /** Every block type referenced by the toolbox, including shadows and nested blocks. */
 export function toolboxBlockTypes(tb) {

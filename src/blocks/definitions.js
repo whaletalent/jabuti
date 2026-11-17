@@ -1,4 +1,5 @@
 import * as Blockly from "blockly";
+import { t } from "../i18n/index.js";
 
 export const TURTLE_BLOCK_TYPES = [
   "pf",
@@ -22,7 +23,7 @@ const icon = (name) => ({
   alt: "*",
 });
 
-export function defineTurtleBlocks() {
+export function defineTurtleBlocks(lang = "pt") {
   Blockly.defineBlocksWithJsonArray([
     {
       type: "pf",
@@ -31,7 +32,7 @@ export function defineTurtleBlocks() {
       previousStatement: null,
       nextStatement: null,
       colour: 185,
-      tooltip: "Move-o para frente",
+      tooltip: t("tip.pf", lang),
     },
     {
       type: "pt",
@@ -40,7 +41,7 @@ export function defineTurtleBlocks() {
       previousStatement: null,
       nextStatement: null,
       colour: 185,
-      tooltip: "Move-o para trás",
+      tooltip: t("tip.pt", lang),
     },
     {
       type: "pd",
@@ -52,7 +53,7 @@ export function defineTurtleBlocks() {
       previousStatement: null,
       nextStatement: null,
       colour: 290,
-      tooltip: "Gira-o para a direita",
+      tooltip: t("tip.pd", lang),
     },
     {
       type: "pe",
@@ -64,7 +65,7 @@ export function defineTurtleBlocks() {
       previousStatement: null,
       nextStatement: null,
       colour: 290,
-      tooltip: "Gira-o para a esquerda",
+      tooltip: t("tip.pe", lang),
     },
     {
       type: "pdv",
@@ -77,7 +78,7 @@ export function defineTurtleBlocks() {
       previousStatement: null,
       nextStatement: null,
       colour: 290,
-      tooltip: "Gira-o para a direita (Aceita blocos e variáveis)",
+      tooltip: t("tip.pdv", lang),
     },
     {
       type: "pev",
@@ -90,7 +91,7 @@ export function defineTurtleBlocks() {
       previousStatement: null,
       nextStatement: null,
       colour: 290,
-      tooltip: "Gira-o para a esquerda (Aceita blocos e variáveis)",
+      tooltip: t("tip.pev", lang),
     },
     {
       type: "color",
@@ -100,7 +101,7 @@ export function defineTurtleBlocks() {
       previousStatement: null,
       nextStatement: null,
       colour: 20,
-      tooltip: "Modifica a cor do Rastro",
+      tooltip: t("tip.color", lang),
     },
   ]);
 }

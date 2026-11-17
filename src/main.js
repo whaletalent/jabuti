@@ -1,17 +1,32 @@
 import * as Blockly from "blockly";
 import "./styles/main.css";
 import { setupBlockly } from "./blocks/setup.js";
-import { toolbox } from "./blocks/toolbox.js";
+import { buildToolbox } from "./blocks/toolbox.js";
 import { loadExampleIfEmpty } from "./blocks/example.js";
 import { createTurtle } from "./game/turtle.js";
 import { createGame } from "./game/createGame.js";
 import { createRunner } from "./runner.js";
 import { bindUi } from "./ui.js";
+import { getLang, setLang, translateDocument } from "./i18n/index.js";
+import {
+  createIcons,
+  Play,
+  Square,
+  Undo2,
+  Redo2,
+  Gauge,
+  Ruler,
+  Languages,
+} from "lucide";
 
-setupBlockly();
+const lang = getLang();
+translateDocument(document, lang);
+document.getElementById("lang-code").textContent = lang.toUpperCase();
+createIcons({ icons: { Play, Square, Undo2, Redo2, Gauge, Ruler, Languages } });
+setupBlockly({ lang });
 
 const workspace = Blockly.inject("blocklyDiv", {
-  toolbox,
+  toolbox: buildToolbox(lang),
   trashcan: true,
   horizontalLayout: true,
   scrollbars: true,
@@ -67,5 +82,14 @@ ready.then((scene) => {
       ui.setRunning(false);
     },
   });
-  ui = bindUi({ runner, workspace, scene, turtle });
+  ui = bindUi({
+    runner,
+    workspace,
+    scene,
+    turtle,
+    onToggleLang: () => {
+      setLang(lang === "pt" ? "en" : "pt");
+      location.reload();
+    },
+  });
 });

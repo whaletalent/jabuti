@@ -11,7 +11,7 @@ A programming-logic learning game: snap Blockly blocks together and a turtle wal
 
 ## What it is
 
-Jabuti ("tortoise" in Portuguese) is an educational, Logo-style game. Players build a program out of visual blocks (move, turn, repeat, set colour, use variables and functions) and press "Executar" to watch the turtle draw it. The workspace opens with a ready-made example (set the colour to cyan, then repeat 36 times: forward, turn right 15°) that draws a circle; run it, change it or clear it and start from scratch. It is meant to introduce programming logic to Brazilian kids, so the interface is in Portuguese (pt-BR); this README is in English. It works on desktops, tablets and phones: on narrow or portrait screens the canvas sits above the block editor.
+Jabuti ("tortoise" in Portuguese) is an educational, Logo-style game. Players build a program out of visual blocks (move, turn, repeat, set colour, use variables and functions) and press "Executar" to watch the turtle draw it. The workspace opens with a ready-made example (set the colour to cyan, then repeat 36 times: forward, turn right 15°) that draws a circle; run it, change it or clear it and start from scratch. It is meant to introduce programming logic to Brazilian kids, so the interface defaults to Portuguese (pt-BR) and can be switched to English with the language button; this README is in English. It works on desktops, tablets and phones: on narrow or portrait screens the canvas sits above the block editor.
 
 ## The blocks
 
@@ -47,6 +47,7 @@ Controls: "Executar" runs the program and is re-enabled when it ends, so success
 | [Blockly 13](https://developers.google.com/blockly)              | The visual block editor and the blocks-to-JavaScript generator             |
 | `@blockly/field-angle`, `@blockly/field-colour`                  | Angle picker and colour blocks, which moved out of Blockly core            |
 | [Phaser 4](https://phaser.io)                                    | The canvas: background, trail render texture and turtle sprite             |
+| [Lucide](https://lucide.dev)                                     | Icon set for the control buttons and sliders                               |
 | [JS-Interpreter 6](https://github.com/NeilFraser/JS-Interpreter) | Runs generated code step by step, so blocks can be highlighted and stopped |
 | [Vitest](https://vitest.dev)                                     | Unit tests (the Vitest suite)                                              |
 | ESLint, Prettier                                                 | Linting and formatting                                                     |
