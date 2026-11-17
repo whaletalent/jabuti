@@ -24,9 +24,17 @@ export function createGame({ parent, turtle }) {
     scene: [],
   });
 
-  game.events.once(Phaser.Core.Events.READY, () => {
-    game.scene.add("turtle", TurtleScene, true, { turtle });
+  // Resolves with the scene once its create() has run (trail/player exist).
+  const ready = new Promise((resolve) => {
+    game.events.once(Phaser.Core.Events.READY, () => {
+      game.scene.add("turtle", TurtleScene, true, { turtle });
+      game.scene
+        .getScene("turtle")
+        .events.once(Phaser.Scenes.Events.CREATE, () => {
+          resolve(game.scene.getScene("turtle"));
+        });
+    });
   });
 
-  return { game, getScene: () => game.scene.getScene("turtle") };
+  return { game, ready, getScene: () => game.scene.getScene("turtle") };
 }

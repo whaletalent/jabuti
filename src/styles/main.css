@@ -1,0 +1,230 @@
+:root {
+  --dark-primary: #212529;
+  --dark-lighter: #373b3f;
+  --dark-lightest: #4d5155;
+  --dark-darker: #1e2225;
+  --text-color: #ddd;
+  --blockly-green: #5ba55b;
+  --blockly-green-dark: #2e532e;
+  --blockly-green-light: #a2d1a2;
+  --blockly-green-lighter: #c6e3c6;
+  --blockly-blue: #5a9ea4;
+}
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+
+* {
+  margin: 0;
+  font-family: monospace;
+}
+
+canvas {
+  image-rendering: pixelated;
+}
+
+@media only screen and (max-width: 600px) {
+  body .app {
+    display: none;
+  }
+  body .warning p {
+    display: inline !important;
+  }
+}
+
+@keyframes rotating {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+#preloader {
+  position: absolute;
+  z-index: 9999;
+  height: 100%;
+  width: 100%;
+  background-color: var(--dark-primary);
+  transition: opacity 0.5s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#preloader #loader {
+  height: 50px;
+  image-rendering: pixelated;
+  animation: rotating 5s linear infinite;
+}
+
+.tutorial {
+  position: absolute;
+  z-index: 888;
+  cursor: pointer;
+  align-self: center;
+  box-shadow: 0.1em 0.1em 1em 0.1em var(--blockly-blue);
+}
+
+.app {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: var(--dark-primary);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.toolbox {
+  height: 90%;
+  width: 50%;
+}
+
+#blocklyDiv {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+#simulacao {
+  height: 100%;
+  width: 50%;
+  background-color: var(--dark-primary);
+}
+
+.botoes {
+  height: 10%;
+  width: 100%;
+  background-color: var(--dark-primary);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.botoes .botao {
+  position: relative;
+  background-color: var(--blockly-green);
+  height: 50%;
+  width: 3em;
+  border: 5px solid var(--blockly-green-dark);
+  border-top: 1px solid var(--blockly-green-lighter);
+  border-radius: 5px;
+}
+
+.botoes .botao:disabled {
+  border: 3px solid var(--dark-darker);
+  background-color: var(--dark-lighter);
+  cursor: no-drop;
+}
+
+/* Blockly config */
+.blocklySvg {
+  background-color: var(--dark-primary);
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 1.9);
+}
+
+.blocklyScrollbarHandle {
+  fill: var(--blockly-green);
+}
+
+.blocklyScrollbarBackground:hover + .blocklyScrollbarHandle,
+.blocklyScrollbarHandle:hover {
+  fill: var(--blockly-green);
+}
+
+.blocklyToolboxDiv {
+  background-color: var(--dark-lighter);
+}
+
+.blocklyToolboxDiv .blocklyTreeLabel,
+.blocklyToolboxCategory .blocklyToolboxCategoryLabel {
+  color: var(--text-color);
+}
+
+.blocklyHorizontalTree:hover {
+  background-color: var(--dark-lightest) !important;
+}
+
+.blocklyFlyoutBackground {
+  fill: var(--dark-lighter) !important;
+}
+
+/* Range */
+.speedRoll {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 10em;
+  height: 0.1em;
+  border-radius: 5px;
+  border: solid var(--dark-lightest) 0.2em;
+  background: transparent;
+  outline: none;
+}
+
+.speedRoll::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background: transparent;
+  cursor: grabbing;
+  background-image: url("/assets/speed.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 1.5em;
+}
+
+.speedRoll::-moz-range-thumb {
+  appearance: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--blockly-green-light);
+  cursor: pointer;
+  box-shadow: 0 0 25px var(--blockly-green-light);
+}
+
+/* Hover labels */
+.botao,
+.velocidade {
+  position: relative;
+  display: inline;
+}
+
+.botao span,
+.velocidade > span {
+  position: absolute;
+  width: auto;
+  color: var(--dark-primary);
+  background: var(--text-color);
+  padding: 0.1em;
+  text-align: center;
+  visibility: hidden;
+}
+
+.botao:hover span {
+  visibility: visible;
+  opacity: 1;
+  bottom: 2.5em;
+  left: -0.8em;
+  z-index: 999;
+}
+
+.velocidade:hover > span {
+  visibility: visible;
+  opacity: 1;
+  bottom: 2em;
+  left: -0.8em;
+  z-index: 999;
+}
+
+.velocidade output {
+  color: var(--text-color);
+}
