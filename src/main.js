@@ -2,6 +2,7 @@ import * as Blockly from "blockly";
 import "./styles/main.css";
 import { setupBlockly } from "./blocks/setup.js";
 import { toolbox } from "./blocks/toolbox.js";
+import { loadExampleIfEmpty } from "./blocks/example.js";
 import { createTurtle } from "./game/turtle.js";
 import { createGame } from "./game/createGame.js";
 import { createRunner } from "./runner.js";
@@ -15,6 +16,7 @@ const workspace = Blockly.inject("blocklyDiv", {
   horizontalLayout: true,
   scrollbars: true,
 });
+loadExampleIfEmpty(workspace);
 
 const parent = document.getElementById("simulacao");
 const width = parent.clientWidth || 800;
