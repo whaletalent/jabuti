@@ -17,11 +17,10 @@ const workspace = Blockly.inject("blocklyDiv", {
 });
 
 const parent = document.getElementById("simulacao");
-const turtle = createTurtle({
-  width: parent.clientWidth,
-  height: parent.clientHeight,
-});
-const { ready } = createGame({ parent, turtle });
+const width = parent.clientWidth || 800;
+const height = parent.clientHeight || 600;
+const turtle = createTurtle({ width, height });
+const { ready } = createGame({ parent, turtle, width, height });
 
 ready.then((scene) => {
   const api = {
@@ -38,7 +37,10 @@ ready.then((scene) => {
     api,
     speedMs: 30,
     onStart: () => ui.setRunning(true),
-    onFinish: () => ui.setRunning(false),
+    onFinish: (r) => {
+      if (r?.error) console.error(r.error);
+      ui.setRunning(false);
+    },
   });
   ui = bindUi({ runner, workspace, scene, turtle });
 });

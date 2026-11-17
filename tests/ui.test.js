@@ -25,12 +25,16 @@ describe("ui", () => {
     expect(document.getElementById("stop").disabled).toBe(false);
     ui.setRunning(false);
     expect(document.getElementById("play").disabled).toBe(false);
+    expect(document.getElementById("stop").disabled).toBe(false);
+    document.getElementById("stop").click();
     expect(document.getElementById("stop").disabled).toBe(true);
   });
   it("maps the speed slider to 55 - value and the step slider to the turtle", () => {
     dom();
     const d = deps();
     bindUi(d);
+    expect(d.runner.setSpeed).toHaveBeenCalledWith(30);
+    expect(d.turtle.step).toBe(8);
     const v = document.getElementById("velocidade");
     v.value = "50";
     v.dispatchEvent(new Event("input"));

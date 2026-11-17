@@ -9,6 +9,7 @@ export function bindUi({ runner, workspace, scene, turtle, doc = document }) {
   stop.addEventListener("click", () => {
     runner.stop();
     scene.resetScene();
+    stop.disabled = true;
   });
   $("clear").addEventListener("click", () => {
     if (confirm("Remover os blocos da tela?")) workspace.clear();
@@ -16,13 +17,13 @@ export function bindUi({ runner, workspace, scene, turtle, doc = document }) {
   $("undo").addEventListener("click", () => workspace.undo(false));
   $("redo").addEventListener("click", () => workspace.undo(true));
 
-  $("velocidade").addEventListener("input", (e) =>
-    runner.setSpeed(55 - Number(e.target.value)),
-  );
-  $("passo").addEventListener("input", (e) => {
-    setStep(turtle, Number(e.target.value));
-    $("passo-valor").textContent = e.target.value;
-  });
+  const applySpeed = (value) => runner.setSpeed(55 - Number(value));
+  const applyStep = (value) => {
+    setStep(turtle, Number(value));
+    $("passo-valor").textContent = value;
+  };
+  $("velocidade").addEventListener("input", (e) => applySpeed(e.target.value));
+  $("passo").addEventListener("input", (e) => applyStep(e.target.value));
 
   const preloader = $("preloader");
   setTimeout(() => {
@@ -38,8 +39,12 @@ export function bindUi({ runner, workspace, scene, turtle, doc = document }) {
 
   const setRunning = (running) => {
     play.disabled = running;
-    stop.disabled = !running;
+    // After a run ends, Stop stays enabled so it can reset the drawing.
+    if (running) stop.disabled = false;
   };
   setRunning(false);
+  stop.disabled = true;
+  applySpeed($("velocidade").value);
+  applyStep($("passo").value);
   return { setRunning };
 }

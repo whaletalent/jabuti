@@ -10,10 +10,12 @@ const FALLBACK_HEIGHT = 600;
  * `getScene()` returns null/undefined before READY and the scene instance
  * afterwards (its assets may still be loading; `create()` runs later).
  */
-export function createGame({ parent, turtle }) {
-  const width = parent.clientWidth || FALLBACK_WIDTH;
-  const height = parent.clientHeight || FALLBACK_HEIGHT;
-
+export function createGame({
+  parent,
+  turtle,
+  width = parent.clientWidth || FALLBACK_WIDTH,
+  height = parent.clientHeight || FALLBACK_HEIGHT,
+}) {
   const game = new Phaser.Game({
     type: Phaser.AUTO,
     parent,
