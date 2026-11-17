@@ -43,6 +43,7 @@ export class TurtleScene extends Phaser.Scene {
       originX: 0.5,
       originY: 0.5,
     });
+    this.trail.render();
   }
 
   moveForward() {
@@ -70,5 +71,6 @@ export class TurtleScene extends Phaser.Scene {
   resetScene() {
     reset(this.turtle);
     this.trail.clear();
+    this.trail.render();
   }
 }

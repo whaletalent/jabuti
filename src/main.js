@@ -24,9 +24,6 @@ const turtle = createTurtle({
 const { ready } = createGame({ parent, turtle });
 
 ready.then((scene) => {
-  // Phaser 4 buffers RenderTexture commands until render(); 'all' mode renders
-  // every frame and `preserve` keeps the buffer so the trail accumulates.
-  scene.trail.setRenderMode("all", true);
   const api = {
     jabutiPF: () => scene.moveForward(),
     jabutiPT: () => scene.moveBack(),
@@ -44,5 +41,4 @@ ready.then((scene) => {
     onFinish: () => ui.setRunning(false),
   });
   ui = bindUi({ runner, workspace, scene, turtle });
-  ui.setRunning(false);
 });

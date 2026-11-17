@@ -40,8 +40,6 @@ export function bindUi({ runner, workspace, scene, turtle, doc = document }) {
     play.disabled = running;
     stop.disabled = !running;
   };
-  // The markup ships "Parar Execução" disabled; bindUi hands control to
-  // setRunning, which callers invoke with the initial state.
-  stop.disabled = false;
+  setRunning(false);
   return { setRunning };
 }

@@ -44,7 +44,8 @@ describe("ui", () => {
   it("stop resets the scene and undo/redo map to workspace.undo", () => {
     dom();
     const d = deps();
-    bindUi(d);
+    const ui = bindUi(d);
+    ui.setRunning(true);
     document.getElementById("stop").click();
     expect(d.runner.stop).toHaveBeenCalledOnce();
     expect(d.scene.resetScene).toHaveBeenCalledOnce();
