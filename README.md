@@ -34,7 +34,7 @@ Controls: "Executar" runs the program and is re-enabled when it ends, so success
 ## How it works
 
 1. Blockly turns the block workspace into JavaScript, prefixing each statement with a `highlightBlock(id)` call.
-2. JS-Interpreter runs that code in a sandbox, one statement per tick (the delay between ticks is 55 minus the speed slider value, in ms).
+2. JS-Interpreter runs that code in a sandbox, one interpreter step per tick (the delay between ticks is 55 minus the speed slider value, in ms).
 3. The sandbox can only call a small API: `jabutiPF`, `jabutiPT`, `jabutiPD`, `jabutiPE`, `setColor` and `highlightBlock`.
 4. Those calls update a plain turtle state (position, heading, colour, step) in `src/game/turtle.js`, which has no Phaser dependency and is unit-tested.
 5. The Phaser scene moves the sprite and stamps one trail dot per move onto a render texture.
@@ -48,7 +48,7 @@ Controls: "Executar" runs the program and is re-enabled when it ends, so success
 | `@blockly/field-angle`, `@blockly/field-colour`                  | Angle picker and colour blocks, which moved out of Blockly core            |
 | [Phaser 4](https://phaser.io)                                    | The canvas: background, trail render texture and turtle sprite             |
 | [JS-Interpreter 6](https://github.com/NeilFraser/JS-Interpreter) | Runs generated code step by step, so blocks can be highlighted and stopped |
-| [Vitest](https://vitest.dev)                                     | Unit tests (29 tests in 6 files)                                           |
+| [Vitest](https://vitest.dev)                                     | Unit tests (the Vitest suite)                                              |
 | ESLint, Prettier                                                 | Linting and formatting                                                     |
 | GitHub Actions                                                   | CI, and deploy to GitHub Pages                                             |
 

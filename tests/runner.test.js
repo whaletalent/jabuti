@@ -64,6 +64,16 @@ describe("runner", () => {
     createRunner({ workspace: ws, api, speedMs: 1 }).run();
     vi.runAllTimers();
     expect(api.jabutiPD).toHaveBeenCalledWith(45);
+
+    const ws2 = new Blockly.Workspace();
+    const color = ws2.newBlock("color");
+    const text = ws2.newBlock("text");
+    text.setFieldValue("abc", "TEXT");
+    color.getInput("NAME").connection.connect(text.outputConnection);
+    const api2 = apiMock();
+    createRunner({ workspace: ws2, api: api2, speedMs: 1 }).run();
+    vi.runAllTimers();
+    expect(api2.setColor).toHaveBeenCalledWith("abc");
   });
   it("stop cancels the pending step (Parar Execução)", () => {
     const ws = new Blockly.Workspace();
