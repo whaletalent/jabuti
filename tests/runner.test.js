@@ -105,4 +105,28 @@ describe("runner", () => {
     expect(onFinish.mock.calls[0][0].error).toBeInstanceOf(Error);
     expect(r.isRunning()).toBe(false);
   });
+  it("calls injected timers unbound (browser Illegal invocation)", () => {
+    const ws = new Blockly.Workspace();
+    program(ws, "pf");
+    const guard = (fn) =>
+      function (...a) {
+        if (this !== undefined && this !== globalThis)
+          throw new TypeError("Illegal invocation");
+        return fn(...a);
+      };
+    const timers = {
+      setTimeout: guard(setTimeout),
+      clearTimeout: guard(clearTimeout),
+    };
+    const onFinish = vi.fn();
+    createRunner({
+      workspace: ws,
+      api: apiMock(),
+      speedMs: 1,
+      onFinish,
+      timers,
+    }).run();
+    vi.runAllTimers();
+    expect(onFinish).toHaveBeenCalledWith({ error: null });
+  });
 });

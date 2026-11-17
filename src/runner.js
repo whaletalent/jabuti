@@ -18,6 +18,7 @@ export function createRunner({
   onFinish = () => {},
   timers = { setTimeout, clearTimeout },
 }) {
+  const { setTimeout: later, clearTimeout: cancel } = timers;
   let interpreter = null;
   let timer = null;
   let running = false;
@@ -42,7 +43,7 @@ export function createRunner({
       return;
     }
     if (more) {
-      timer = timers.setTimeout(step, speed);
+      timer = later(step, speed);
     } else {
       finish({ error: null });
     }
@@ -64,12 +65,12 @@ export function createRunner({
     });
     running = true;
     onStart();
-    timer = timers.setTimeout(step, speed);
+    timer = later(step, speed);
   };
 
   const stop = () => {
     if (!running) return;
-    if (timer !== null) timers.clearTimeout(timer);
+    if (timer !== null) cancel(timer);
     finish({ stopped: true });
   };
 
