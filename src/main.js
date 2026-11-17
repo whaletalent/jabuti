@@ -17,6 +17,7 @@ const workspace = Blockly.inject("blocklyDiv", {
   scrollbars: true,
 });
 loadExampleIfEmpty(workspace);
+window.addEventListener("resize", () => Blockly.svgResize(workspace));
 
 const parent = document.getElementById("simulacao");
 const width = parent.clientWidth || 800;

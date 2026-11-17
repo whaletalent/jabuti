@@ -19,8 +19,14 @@ export function createGame({
   const game = new Phaser.Game({
     type: Phaser.AUTO,
     parent,
-    width,
-    height,
+    // Logical size is measured once; FIT scales the canvas to the container
+    // on resize/rotation so the drawing survives layout changes.
+    scale: {
+      mode: Phaser.Scale.FIT,
+      autoCenter: Phaser.Scale.CENTER_BOTH,
+      width,
+      height,
+    },
     pixelArt: true,
     backgroundColor: "#212529",
     scene: [],
